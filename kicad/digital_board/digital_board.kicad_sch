@@ -1116,6 +1116,249 @@
 			)
 			(embedded_fonts no)
 		)
+		(symbol "LFcomponents:ADR44x"
+			(pin_names
+				(offset 1.016)
+			)
+			(exclude_from_sim no)
+			(in_bom yes)
+			(on_board yes)
+			(property "Reference" "DA"
+				(at 13.97 3.81 0)
+				(effects
+					(font
+						(size 1.524 1.524)
+					)
+				)
+			)
+			(property "Value" "ADR44x"
+				(at 13.97 1.27 0)
+				(effects
+					(font
+						(size 1.524 1.524)
+					)
+				)
+			)
+			(property "Footprint" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.524 1.524)
+					)
+				)
+			)
+			(property "Datasheet" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.524 1.524)
+					)
+				)
+			)
+			(property "Description" ""
+				(at 0 0 0)
+				(effects
+					(font
+						(size 1.27 1.27)
+					)
+					(hide yes)
+				)
+			)
+			(symbol "ADR44x_0_0"
+				(text "X/Y"
+					(at 13.97 -2.54 0)
+					(effects
+						(font
+							(size 1.524 1.524)
+						)
+					)
+				)
+				(pin passive line
+					(at -7.62 -2.54 0)
+					(length 7.62)
+					(name "TP"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+					(number "1"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 35.56 -5.08 180)
+					(length 7.62)
+					(name "NC"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+					(number "7"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+				)
+			)
+			(symbol "ADR44x_0_1"
+				(rectangle
+					(start 0 0)
+					(end 27.94 -12.7)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 10.16 0) (xy 10.16 -12.7)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 17.78 0) (xy 17.78 -12.7)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+			)
+			(symbol "ADR44x_1_0"
+				(pin power_in line
+					(at -7.62 -5.08 0)
+					(length 7.62)
+					(name "Vin"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+					(number "2"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at -7.62 -7.62 0)
+					(length 7.62)
+					(name "NC"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+					(number "3"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+				)
+				(pin power_out line
+					(at -7.62 -10.16 0)
+					(length 7.62)
+					(name "GND"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+					(number "4"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 35.56 -2.54 180)
+					(length 7.62)
+					(name "TP"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+					(number "8"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+				)
+				(pin output line
+					(at 35.56 -7.62 180)
+					(length 7.62)
+					(name "Vout"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+					(number "6"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 35.56 -10.16 180)
+					(length 7.62)
+					(name "TRIM"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+					(number "5"
+						(effects
+							(font
+								(size 1.524 1.524)
+							)
+						)
+					)
+				)
+			)
+			(embedded_fonts no)
+		)
 		(symbol "LFcomponents:AT24C32_64"
 			(pin_names
 				(offset 1.016)
@@ -2124,247 +2367,6 @@
 				(polyline
 					(pts
 						(xy 22.86 -7.62) (xy 15.24 -7.62)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-			)
-			(embedded_fonts no)
-		)
-		(symbol "LFcomponents:REF19x"
-			(pin_names
-				(offset 1.016)
-			)
-			(exclude_from_sim no)
-			(in_bom yes)
-			(on_board yes)
-			(property "Reference" "DA"
-				(at 13.97 3.81 0)
-				(effects
-					(font
-						(size 1.524 1.524)
-					)
-				)
-			)
-			(property "Value" "REF19x"
-				(at 13.97 1.27 0)
-				(effects
-					(font
-						(size 1.524 1.524)
-					)
-				)
-			)
-			(property "Footprint" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.524 1.524)
-					)
-				)
-			)
-			(property "Datasheet" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.524 1.524)
-					)
-				)
-			)
-			(property "Description" ""
-				(at 0 0 0)
-				(effects
-					(font
-						(size 1.27 1.27)
-					)
-					(hide yes)
-				)
-			)
-			(symbol "REF19x_0_0"
-				(text "X/Y"
-					(at 13.97 -2.54 0)
-					(effects
-						(font
-							(size 1.524 1.524)
-						)
-					)
-				)
-				(pin passive line
-					(at -7.62 -2.54 0)
-					(length 7.62)
-					(name "TP"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-					(number "1"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 -5.08 0)
-					(length 7.62)
-					(name "Vin"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-					(number "2"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-				)
-				(pin input line
-					(at -7.62 -7.62 0)
-					(length 7.62)
-					(name "~{SLEEP}"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-					(number "3"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at -7.62 -10.16 0)
-					(length 7.62)
-					(name "GND"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-					(number "4"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -2.54 180)
-					(length 7.62)
-					(name "NC"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-					(number "8"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -5.08 180)
-					(length 7.62)
-					(name "NC"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-					(number "7"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-				)
-				(pin output line
-					(at 35.56 -7.62 180)
-					(length 7.62)
-					(name "Vout"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-					(number "6"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-				)
-				(pin passive line
-					(at 35.56 -10.16 180)
-					(length 7.62)
-					(name "TP"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-					(number "5"
-						(effects
-							(font
-								(size 1.524 1.524)
-							)
-						)
-					)
-				)
-			)
-			(symbol "REF19x_0_1"
-				(rectangle
-					(start 0 0)
-					(end 27.94 -12.7)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 10.16 0) (xy 10.16 -12.7)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 17.78 0) (xy 17.78 -12.7)
 					)
 					(stroke
 						(width 0)
@@ -9182,7 +9184,7 @@
 		)
 		(uuid "313dd355-4aa0-4fa4-ad23-697a42d9202e")
 	)
-	(label "SDA"
+	(label "PD1"
 		(at 76.2 114.3 180)
 		(effects
 			(font
@@ -9722,7 +9724,7 @@
 		)
 		(uuid "817d88d4-6ce3-403b-ab3c-cf2653bfa31d")
 	)
-	(label "DGND"
+	(label "GND"
 		(at 204.47 218.44 180)
 		(effects
 			(font
@@ -9952,7 +9954,7 @@
 		)
 		(uuid "afda9880-7829-4a6d-9c53-0bc82cb21fc4")
 	)
-	(label "SCL"
+	(label "PD0"
 		(at 76.2 111.76 180)
 		(effects
 			(font
@@ -11191,89 +11193,6 @@
 		)
 	)
 	(symbol
-		(lib_id "LFcomponents:REF19x")
-		(at 241.3 34.29 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "00000000-0000-0000-0000-0000616717c1")
-		(property "Reference" "DA2"
-			(at 255.27 29.5402 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Value" "REF198ESZ"
-			(at 255.27 32.2326 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Footprint" "IWsmd_case:SOIC8"
-			(at 241.3 34.29 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 241.3 34.29 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 241.3 34.29 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "55d3078e-4c79-4343-82ce-a3f3284c5de4")
-		)
-		(pin "2"
-			(uuid "79b70fbd-24b0-48a5-a7b6-55ffac0eb86a")
-		)
-		(pin "3"
-			(uuid "9b43da44-0c13-4d6e-8925-1f85156cf0bf")
-		)
-		(pin "4"
-			(uuid "2fca9a8a-9117-412a-8764-554e1509c9bc")
-		)
-		(pin "5"
-			(uuid "3aabcb2d-cd09-466c-b93a-ebbbc6c114b0")
-		)
-		(pin "6"
-			(uuid "badc1661-e200-4f75-bb48-20a6ee81c1c2")
-		)
-		(pin "7"
-			(uuid "34e7558a-232c-402b-9776-5ef457c50167")
-		)
-		(pin "8"
-			(uuid "0502c56a-a55d-4037-baf5-a90f8836ab14")
-		)
-		(instances
-			(project "digital_board"
-				(path "/904f87ef-2bbd-4cec-934f-2ccbfdfb4c4a"
-					(reference "DA2")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "LFbutton:KLS7-TS6601-XX")
 		(at 177.8 218.44 0)
 		(unit 1)
@@ -12289,7 +12208,7 @@
 				)
 			)
 		)
-		(property "Footprint" "IWconnectors:WF-3"
+		(property "Footprint" "IWconnectors:WF-3R"
 			(at 389.89 135.89 0)
 			(effects
 				(font
@@ -13070,7 +12989,7 @@
 				)
 			)
 		)
-		(property "Footprint" "IWconnectors:WF-1"
+		(property "Footprint" "IWconnectors:1_pin_1_0mm"
 			(at 256.54 165.1 0)
 			(effects
 				(font
@@ -13201,12 +13120,13 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:SOIC8"
 			(at 191.77 101.6 0)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -13555,7 +13475,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:CASE_A"
 			(at 237.49 119.38 0)
 			(effects
 				(font
@@ -13691,12 +13611,13 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:SOIC8"
 			(at 318.77 166.37 0)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -13913,7 +13834,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:CASE_A"
 			(at 160.02 57.15 0)
 			(effects
 				(font
@@ -13983,7 +13904,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:CASE_A"
 			(at 180.34 57.15 0)
 			(effects
 				(font
@@ -15006,12 +14927,13 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:SOIC16_RW16"
 			(at 167.64 163.83 0)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -15116,7 +15038,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:CASE_A"
 			(at 242.57 184.15 0)
 			(effects
 				(font
@@ -16072,12 +15994,13 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:SMD0805"
 			(at 177.8 54.61 0)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -16274,12 +16197,13 @@
 				)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:SMD0805"
 			(at 162.56 30.48 0)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -16723,6 +16647,91 @@
 		)
 	)
 	(symbol
+		(lib_id "LFcomponents:ADR44x")
+		(at 241.3 34.29 0)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(fields_autoplaced yes)
+		(uuid "d489aded-5c48-48e2-9947-d091082f2b2c")
+		(property "Reference" "DA2"
+			(at 255.27 29.21 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Value" "ADR444BRZ"
+			(at 255.27 31.75 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Footprint" "IWsmd_case:SOIC8"
+			(at 241.3 34.29 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 241.3 34.29 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 241.3 34.29 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "6"
+			(uuid "126e8078-01bc-4239-b3c9-d0f58a1bd369")
+		)
+		(pin "5"
+			(uuid "eee0b8c9-c9a9-4b07-a7d8-ca1135e1443c")
+		)
+		(pin "7"
+			(uuid "dd0186a5-78a3-4c07-b3c0-c08b9cfdc487")
+		)
+		(pin "4"
+			(uuid "e1bdf1be-ab9c-4538-8a67-542409616fe2")
+		)
+		(pin "8"
+			(uuid "62abf08a-c779-4a5e-a048-33b57578b2e7")
+		)
+		(pin "1"
+			(uuid "dd53d4a8-8f81-49af-832a-b89e18f65316")
+		)
+		(pin "2"
+			(uuid "71e1b4de-46ac-40fb-a547-bdbce284c766")
+		)
+		(pin "3"
+			(uuid "f2ea81bb-8001-4c93-be21-b313d5d91e29")
+		)
+		(instances
+			(project ""
+				(path "/904f87ef-2bbd-4cec-934f-2ccbfdfb4c4a"
+					(reference "DA2")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
 		(lib_id "LFcapitors:CAPITORS_ELECTROLYTIC")
 		(at 293.37 44.45 90)
 		(mirror x)
@@ -16750,7 +16759,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:CASE_A"
 			(at 293.37 44.45 0)
 			(effects
 				(font
@@ -16819,7 +16828,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:CASE_A"
 			(at 180.34 33.02 0)
 			(effects
 				(font
@@ -16956,7 +16965,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:CASE_A"
 			(at 218.44 45.72 0)
 			(effects
 				(font
@@ -17161,12 +17170,13 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWcomponents:KLS5-CR2032-01"
 			(at 259.08 177.8 0)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
+				(hide yes)
 			)
 		)
 		(property "Datasheet" ""
@@ -17228,7 +17238,7 @@
 				(justify left)
 			)
 		)
-		(property "Footprint" ""
+		(property "Footprint" "IWsmd_case:CASE_A"
 			(at 160.02 33.02 0)
 			(effects
 				(font
