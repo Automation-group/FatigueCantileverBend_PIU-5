@@ -442,7 +442,7 @@
 			)
 			(embedded_fonts no)
 		)
-		(symbol "LFbutton:KLS7-TS6601-XX"
+		(symbol "LFbutton:button_smd_1"
 			(pin_names
 				(offset 1.016)
 			)
@@ -457,7 +457,7 @@
 					)
 				)
 			)
-			(property "Value" "KLS7-TS6601-XX"
+			(property "Value" "button_smd_1"
 				(at 8.89 11.43 0)
 				(effects
 					(font
@@ -490,10 +490,22 @@
 					(hide yes)
 				)
 			)
-			(symbol "KLS7-TS6601-XX_0_1"
+			(symbol "button_smd_1_0_1"
 				(polyline
 					(pts
 						(xy 2.54 0) (xy 6.35 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 2.54 -5.08) (xy 6.35 -5.08) (xy 11.43 -2.54)
 					)
 					(stroke
 						(width 0)
@@ -561,29 +573,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 5.08 0) (xy 5.08 -5.08) (xy 2.54 -5.08)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 5.08 0)
-					(radius 0.2794)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
 					)
 				)
 				(polyline
@@ -684,7 +673,54 @@
 				)
 				(polyline
 					(pts
+						(xy 8.89 -1.27) (xy 8.89 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 8.89 -3.81) (xy 8.89 -2.54)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(circle
+					(center 8.89 -7.62)
+					(radius 0.2794)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type outline)
+					)
+				)
+				(polyline
+					(pts
 						(xy 11.43 0) (xy 15.24 0)
+					)
+					(stroke
+						(width 0)
+						(type default)
+					)
+					(fill
+						(type none)
+					)
+				)
+				(polyline
+					(pts
+						(xy 11.43 -5.08) (xy 15.24 -5.08)
 					)
 					(stroke
 						(width 0)
@@ -704,29 +740,6 @@
 					)
 					(fill
 						(type none)
-					)
-				)
-				(polyline
-					(pts
-						(xy 12.7 0) (xy 12.7 -5.08) (xy 15.24 -5.08)
-					)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type none)
-					)
-				)
-				(circle
-					(center 12.7 0)
-					(radius 0.2794)
-					(stroke
-						(width 0)
-						(type default)
-					)
-					(fill
-						(type outline)
 					)
 				)
 				(polyline
@@ -778,7 +791,7 @@
 					)
 				)
 			)
-			(symbol "KLS7-TS6601-XX_1_1"
+			(symbol "button_smd_1_1_1"
 				(pin passive line
 					(at 0 0 0)
 					(length 2.54)
@@ -808,6 +821,24 @@
 						)
 					)
 					(number "2"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+				)
+				(pin passive line
+					(at 8.89 -10.16 90)
+					(length 2.54)
+					(name "~"
+						(effects
+							(font
+								(size 1.016 1.016)
+							)
+						)
+					)
+					(number "5"
 						(effects
 							(font
 								(size 1.016 1.016)
@@ -4812,7 +4843,7 @@
 	)
 	(text "MCU RESET"
 		(exclude_from_sim no)
-		(at 186.69 228.6 0)
+		(at 186.436 233.426 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -5103,6 +5134,12 @@
 		(diameter 0)
 		(color 0 0 0 0)
 		(uuid "356e9607-addb-4ef9-bd3e-e10a0f1bb692")
+	)
+	(junction
+		(at 198.12 223.52)
+		(diameter 0)
+		(color 0 0 0 0)
+		(uuid "3703d1f5-226b-44cd-84dd-b4155ffc8248")
 	)
 	(junction
 		(at 284.48 176.53)
@@ -5523,6 +5560,16 @@
 			(type default)
 		)
 		(uuid "09b5d683-34c5-4fb6-8f3c-6636f9845d57")
+	)
+	(wire
+		(pts
+			(xy 198.12 231.14) (xy 198.12 223.52)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "09d9ee28-6338-4528-9b72-7ce187ef6690")
 	)
 	(wire
 		(pts
@@ -6763,6 +6810,16 @@
 			(type default)
 		)
 		(uuid "6a26f395-dc5b-496d-869f-18aa1a83dad3")
+	)
+	(wire
+		(pts
+			(xy 186.69 228.6) (xy 186.69 231.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "6a4b0984-46c6-4a9f-8c1f-6462c8545a1f")
 	)
 	(wire
 		(pts
@@ -8073,6 +8130,16 @@
 			(type default)
 		)
 		(uuid "c32bd6ec-868c-489f-9854-c68f83d258ac")
+	)
+	(wire
+		(pts
+			(xy 186.69 231.14) (xy 198.12 231.14)
+		)
+		(stroke
+			(width 0)
+			(type default)
+		)
+		(uuid "c4f9f3d1-5dc6-454e-94bc-9706aef82900")
 	)
 	(wire
 		(pts
@@ -11193,77 +11260,6 @@
 		)
 	)
 	(symbol
-		(lib_id "LFbutton:KLS7-TS6601-XX")
-		(at 177.8 218.44 0)
-		(unit 1)
-		(exclude_from_sim no)
-		(in_bom yes)
-		(on_board yes)
-		(dnp no)
-		(uuid "00000000-0000-0000-0000-00006168d651")
-		(property "Reference" "S1"
-			(at 186.69 204.8002 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Value" "FSM1LP"
-			(at 186.69 207.4926 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Footprint" "IWsmd_case:SWD_BUTTON"
-			(at 177.8 218.44 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-				(hide yes)
-			)
-		)
-		(property "Datasheet" ""
-			(at 177.8 218.44 0)
-			(effects
-				(font
-					(size 1.524 1.524)
-				)
-			)
-		)
-		(property "Description" ""
-			(at 177.8 218.44 0)
-			(effects
-				(font
-					(size 1.27 1.27)
-				)
-			)
-		)
-		(pin "1"
-			(uuid "f1f003c5-2334-496f-9834-da0a4d9fa799")
-		)
-		(pin "2"
-			(uuid "deb6baec-2f3c-4cfb-9fe9-2839bcb9da82")
-		)
-		(pin "3"
-			(uuid "933d5621-181d-453f-9d6e-daf21c21f810")
-		)
-		(pin "4"
-			(uuid "aa1e2e5e-b1d2-42d1-8b54-35f6b3fc9a65")
-		)
-		(instances
-			(project "digital_board"
-				(path "/904f87ef-2bbd-4cec-934f-2ccbfdfb4c4a"
-					(reference "S1")
-					(unit 1)
-				)
-			)
-		)
-	)
-	(symbol
 		(lib_id "LFconnectors:connector_8pin_gost")
 		(at 68.58 45.72 0)
 		(mirror y)
@@ -13733,6 +13729,82 @@
 			(project "digital_board"
 				(path "/904f87ef-2bbd-4cec-934f-2ccbfdfb4c4a"
 					(reference "R11")
+					(unit 1)
+				)
+			)
+		)
+	)
+	(symbol
+		(lib_id "LFbutton:button_smd_1")
+		(at 195.58 218.44 0)
+		(mirror y)
+		(unit 1)
+		(exclude_from_sim no)
+		(in_bom yes)
+		(on_board yes)
+		(dnp no)
+		(uuid "2dcf7d04-bd5d-4c7e-bbd4-a3f3a8fa501d")
+		(property "Reference" "S1"
+			(at 186.69 204.47 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Value" "FSM1LP"
+			(at 186.69 207.01 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Footprint" "IWsmd_case:SWD_BUTTON"
+			(at 195.58 218.44 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+				(hide yes)
+			)
+		)
+		(property "Datasheet" ""
+			(at 195.58 218.44 0)
+			(effects
+				(font
+					(size 1.524 1.524)
+				)
+			)
+		)
+		(property "Description" ""
+			(at 195.58 218.44 0)
+			(effects
+				(font
+					(size 1.27 1.27)
+				)
+				(hide yes)
+			)
+		)
+		(pin "3"
+			(uuid "8a999e47-869c-4230-aaf9-08bef6d3fee7")
+		)
+		(pin "5"
+			(uuid "d4a1e426-61c2-40d6-869a-bf4a411f0df9")
+		)
+		(pin "1"
+			(uuid "b6a751e8-440b-44db-9614-44c9e381a0ce")
+		)
+		(pin "2"
+			(uuid "3b0041dc-3c4e-46a4-a88c-35872676eb2d")
+		)
+		(pin "4"
+			(uuid "792ac523-b734-4e15-b844-9da1a729a764")
+		)
+		(instances
+			(project ""
+				(path "/904f87ef-2bbd-4cec-934f-2ccbfdfb4c4a"
+					(reference "S1")
 					(unit 1)
 				)
 			)
