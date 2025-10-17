@@ -3983,6 +3983,17 @@
 		)
 		(uuid "08355dad-da09-4b87-9b1b-c49478106b8a")
 	)
+	(text "Если нет ложного\nсрабатывания кнопок\nу клавиатуры то\nконденсаторы\nТ-образных НЧ фильтров\nвпаивать не нужно,\nа все резисторы\nфильтров нужно заменить\nна перемычки 0 Ом.\n"
+		(exclude_from_sim no)
+		(at 380.492 62.738 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "0e0951db-147b-43d0-8f32-30b18d799155")
+	)
 	(text "VCCIN"
 		(exclude_from_sim no)
 		(at 52.578 145.796 0)
@@ -4500,6 +4511,17 @@
 		)
 		(uuid "80f49773-2926-46ef-b787-3fe7d47ceaa3")
 	)
+	(text "1) Вместо R18 нужно добавить делитель\nиз двух резисторов по 100 кОм от систочника\nопорного напряжения AREF. К резистору\nидущему на землю SGND нужно добавить\nкерамический чип конденсатор 0.1 мкФ.\nРезистор обратной связи компаратора R20\nу DA3 впаивать не нунужно, наличие резустора\nприводит к искажению в сигнале с ОУ DA1 и\nмногократному срабатыванию компаратора\nна фронтах выходного сигнала.\n2) На выходе компаратора DA3 нужно поставить\nТ-образный НЧ фильтр из резисторов 10 кОм и\nконденсатора 0.1 мкФ, а после фильтра поставить\nбуферный каскад с тригером Шмитта. Если этого\nне сделать то на фронтах выходного сигнала\nбудет сильный \"звон\", приводящий к неверному\nизменению длительности импульса, а следовательно\nи частоты измеряемого сигнала."
+		(exclude_from_sim no)
+		(at 270.256 134.874 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+			(justify left)
+		)
+		(uuid "82a4a9cc-679b-4f18-80c2-abe088168755")
+	)
 	(text "ADC0"
 		(exclude_from_sim no)
 		(at 396.748 51.816 0)
@@ -4599,6 +4621,16 @@
 		)
 		(uuid "8c222c6a-98d0-47d9-9c0a-c99ffda2484d")
 	)
+	(text "!Перепутано подключение к\n2 и 3 ногам DA1"
+		(exclude_from_sim no)
+		(at 199.898 123.444 0)
+		(effects
+			(font
+				(size 1.27 1.27)
+			)
+		)
+		(uuid "95276011-6f00-44b9-a977-ebfd443ab6c0")
+	)
 	(text "PD0"
 		(exclude_from_sim no)
 		(at 98.044 112.776 0)
@@ -4654,9 +4686,9 @@
 		)
 		(uuid "a2afea49-5f2f-42e6-97fb-44300844e282")
 	)
-	(text "Защита записи WP\n\n+5V - защита от записи включена\n\n"
+	(text "Защита записи WP\n+5V - защита от записи включена\n\n"
 		(exclude_from_sim no)
-		(at 291.338 158.75 0)
+		(at 291.338 160.02 0)
 		(effects
 			(font
 				(size 1.27 1.27)
@@ -10818,13 +10850,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 178.3588 142.1892 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -10886,7 +10919,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 163.8808 99.6188 90)
 			(effects
 				(font
@@ -11023,13 +11056,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 243.8908 102.1588 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -11227,7 +11261,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 289.6108 88.1888 90)
 			(effects
 				(font
@@ -12426,7 +12460,7 @@
 		(dnp no)
 		(uuid "00000000-0000-0000-0000-00006172e274")
 		(property "Reference" "R25"
-			(at 319.278 38.608 0)
+			(at 320.548 38.608 0)
 			(effects
 				(font
 					(size 1.8034 1.8034)
@@ -12452,13 +12486,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 323.7992 39.9288 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -12494,7 +12529,7 @@
 		(dnp no)
 		(uuid "00000000-0000-0000-0000-000061737811")
 		(property "Reference" "R24"
-			(at 304.292 38.608 0)
+			(at 303.784 38.608 0)
 			(effects
 				(font
 					(size 1.8034 1.8034)
@@ -12503,7 +12538,7 @@
 			)
 		)
 		(property "Value" "0"
-			(at 311.404 38.354 0)
+			(at 311.658 38.608 0)
 			(effects
 				(font
 					(size 1.8034 1.8034)
@@ -12520,13 +12555,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 306.1208 39.9288 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -12588,7 +12624,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 330.2508 99.6188 90)
 			(effects
 				(font
@@ -12724,13 +12760,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 294.6908 174.5488 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -12792,13 +12829,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 362.0008 104.6988 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -12860,7 +12898,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 163.8808 90.7288 90)
 			(effects
 				(font
@@ -12983,6 +13021,7 @@
 				(font
 					(size 1.8034 1.8034)
 				)
+				(hide yes)
 			)
 		)
 		(property "Footprint" "IWconnectors:1_pin_1_0mm"
@@ -13041,8 +13080,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "0.001 мк"
-			(at 196.596 78.994 0)
+		(property "Value" "1 н"
+			(at 198.628 78.994 0)
 			(effects
 				(font
 					(size 1.8034 1.8034)
@@ -13208,13 +13247,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 339.1408 56.4388 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -13344,13 +13384,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 198.1708 90.7288 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -13394,8 +13435,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1 мк"
-			(at 349.25 73.152 90)
+		(property "Value" "100 п"
+			(at 349.25 73.914 90)
 			(effects
 				(font
 					(size 1.8034 1.8034)
@@ -13549,13 +13590,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 362.0008 125.0188 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -13702,7 +13744,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 163.8808 118.6688 90)
 			(effects
 				(font
@@ -13846,13 +13888,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 348.0308 125.0188 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -14054,13 +14097,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 355.6508 33.5788 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -14122,13 +14166,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 325.1708 56.4388 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -14191,13 +14236,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 387.2992 170.7388 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -14241,7 +14287,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1 мк"
+		(property "Value" "100 п"
 			(at 360.7562 113.9444 90)
 			(effects
 				(font
@@ -14327,7 +14373,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 321.3608 88.1888 90)
 			(effects
 				(font
@@ -14377,7 +14423,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1 мк"
+		(property "Value" "100 п"
 			(at 360.7562 93.6244 90)
 			(effects
 				(font
@@ -14464,13 +14510,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 387.2992 164.3888 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -14533,13 +14580,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 139.7508 166.9288 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -14601,7 +14649,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 147.3708 99.6188 90)
 			(effects
 				(font
@@ -14669,13 +14717,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 341.6808 33.5788 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -14737,13 +14786,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 227.3808 164.3888 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -14873,13 +14923,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 348.0308 104.6988 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -14941,13 +14992,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 362.0008 84.3788 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -15170,7 +15222,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1 мк"
+		(property "Value" "100 п"
 			(at 354.4062 27.5844 90)
 			(effects
 				(font
@@ -15324,7 +15376,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 240.5888 161.2392 90)
 			(effects
 				(font
@@ -15392,13 +15444,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 348.0308 64.0588 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -15460,13 +15513,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 355.6508 39.9288 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -15528,7 +15582,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 218.9988 161.2392 90)
 			(effects
 				(font
@@ -15596,7 +15650,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 348.0308 84.3788 90)
 			(effects
 				(font
@@ -15666,13 +15720,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 132.1308 169.4688 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -15716,7 +15771,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1 мк"
+		(property "Value" "100 п"
 			(at 354.4062 49.1744 90)
 			(effects
 				(font
@@ -15803,13 +15858,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 387.2992 158.0388 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -15871,7 +15927,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 147.3708 109.7788 90)
 			(effects
 				(font
@@ -16007,13 +16063,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 287.0708 172.0088 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -16143,13 +16200,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 263.4488 120.5992 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -16211,13 +16269,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 341.6808 39.9288 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -16346,13 +16405,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 138.9888 153.6192 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -16414,13 +16474,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 146.6088 153.6192 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -16482,13 +16543,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 362.0008 64.0588 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -16550,13 +16612,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 147.3708 164.3888 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -16618,7 +16681,7 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 163.8808 109.7788 90)
 			(effects
 				(font
@@ -16686,13 +16749,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 302.3108 177.0888 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -16978,13 +17042,14 @@
 				(hide yes)
 			)
 		)
-		(property "Datasheet" "~"
+		(property "Datasheet" ""
 			(at 302.3108 166.9288 90)
 			(effects
 				(font
 					(size 1.524 1.524)
 				)
 				(justify right)
+				(hide yes)
 			)
 		)
 		(property "Description" ""
@@ -17097,7 +17162,7 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1 мк"
+		(property "Value" "100 п"
 			(at 360.7562 134.2644 90)
 			(effects
 				(font
@@ -17165,8 +17230,8 @@
 				(justify left)
 			)
 		)
-		(property "Value" "1 мк"
-			(at 326.898 65.786 90)
+		(property "Value" "100 п"
+			(at 325.628 66.294 90)
 			(effects
 				(font
 					(size 1.8034 1.8034)
