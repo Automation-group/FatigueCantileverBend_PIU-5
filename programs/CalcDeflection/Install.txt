@@ -1,0 +1,15 @@
+Сборка программы CalcDeflection
+
+Для сборки потребутеся: GCC, QT6, Сmake 3.2
+
+1) Создаём дирректорию для сборки
+mkdir build
+
+2) Создаём в директории build служебные файлы CMakeCashe
+cmake -S . -B build/
+
+3) Собираем бинарный файл программы в 4 потока
+cmake --build build/ -- -j4
+
+// или в один поток
+cmake --build build/
