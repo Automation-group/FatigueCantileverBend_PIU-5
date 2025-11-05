@@ -1,9 +1,7 @@
 #include <QtGui>
 #include <QSettings>
 #include <QtCore>
-#include <QtDebug>
 #include <cmath>
-#include <iostream>
 
 #include "mainwindow.h"
 #include "../ui/ui_mainwindow.h"
@@ -32,7 +30,7 @@ void MainWindow::loadSettings(){
 
     // Параметры образца
     ui->doubleSpinBox_Lp->setValue(settings_CalcDeflection->value("settings/Lp").value<double>()); // длина рабочей части [мм]
-    ui->doubleSpinBox_H->setValue(settings_CalcDeflection->value("settings/H").value<double>()); // ширина образца [мм]
+    ui->doubleSpinBox_H->setValue(settings_CalcDeflection->value("settings/H_p").value<double>()); // ширина образца [мм]
     ui->doubleSpinBox_b->setValue(settings_CalcDeflection->value("settings/b").value<double>()); // толщина образца [мм]
     ui->doubleSpinBox_h->setValue(settings_CalcDeflection->value("settings/h").value<double>()); // ширина рабочей части [мм]
     ui->doubleSpinBox_E1->setValue(settings_CalcDeflection->value("settings/E1").value<double>()); // модуль Юнга образца [ГПа]
@@ -56,7 +54,7 @@ void MainWindow::saveSettings(){
 
     // Параметры образца
     settings_CalcDeflection->setValue("settings/Lp", ui->doubleSpinBox_Lp->value()); // длина рабочей части [мм]
-    settings_CalcDeflection->setValue("settings/H", ui->doubleSpinBox_H->value()); // ширина образца [мм]
+    settings_CalcDeflection->setValue("settings/H_p", ui->doubleSpinBox_H->value()); // ширина образца [мм]
     settings_CalcDeflection->setValue("settings/b", ui->doubleSpinBox_b->value()); // толщина образца [мм]
     settings_CalcDeflection->setValue("settings/h", ui->doubleSpinBox_h->value()); // ширина рабочей части [мм]
     settings_CalcDeflection->setValue("settings/E1", ui->doubleSpinBox_E1->value()); // модуль Юнга образца [ГПа]
@@ -103,7 +101,7 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     double W_tau = 0.0; // максимальное отклонение [м]
     double Wzmax = 0.0; // максимальное напряжение на поверхности рабочей части образца при отклонееии S_tau [Па]
     double I2_z = b_p*b_p*b_p*a_p/12.0; // момент инерции сечения поводка A<=z<=L
-
+	
     double z=0.0;
     while (z < L+dz) {
         if (z < Lp) {
