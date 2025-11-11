@@ -2,6 +2,7 @@
 #include <QSettings>
 #include <QtCore>
 #include <cmath>
+#include <ctime>
 
 #include "mainwindow.h"
 #include "../ui/ui_mainwindow.h"
@@ -73,6 +74,9 @@ void MainWindow::saveSettings(){
 }
 
 void MainWindow::on_pushButton_calc_clicked(bool checked){
+    // Время начала программы
+    double startCalc = clock();
+
     // Номер расчёта
     calcResultId++;
 
@@ -83,14 +87,17 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     double h = ui->doubleSpinBox_h->value()/1000.0; // ширина рабочей части [м]
     double E_1 = ui->doubleSpinBox_E1->value()*1.0e+9; // модуль Юнга образца [Па]
 
-    double R = (Lp*Lp+(H-h)*(H-h))/(4.0*(H-h)); // радиус образца [м]
-    double z_0 = Lp/2.0; // расстояние от центра радиуса до 0 по оси z [м]
-    double y_0 = R + h/2.0; // расстояние от центра радиуса до 0 по оси y [м]
+    static double R = (Lp*Lp+(H-h)*(H-h))/(4.0*(H-h)); // радиус образца [м]
+    static double z_0 = Lp/2.0; // расстояние от центра радиуса до 0 по оси z [м]
+    static double y_0 = R + h/2.0; // расстояние от центра радиуса до 0 по оси y [м]
 
     // Параметры поводка
     double Lh = ui->doubleSpinBox_Lh->value()/1000.0;  // длина поводка [м]
     double a_p = ui->doubleSpinBox_a_p->value()/1000.0; // толщина поводка [м]
     double b_p = ui->doubleSpinBox_b_p->value()/1000.0; // высота поводка [м]
+
+    // Перед типом double ко всем переменным ниже нужно добавить static
+    // В этом случае время расчёта уменьшится в 10 раз
     double E_2 = ui->doubleSpinBox_E2->value()*1.0e+9; // модуль Юнга поводка из титана [Па]
     double P = 1.0; // сила приложенная к концу поводка [H] (используется в расчёте и измерять её не нужно)
     double L = Lp + Lh; // суммарная длина поводка и образца [м]
@@ -101,12 +108,13 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     double W_tau = 0.0; // максимальное отклонение [м]
     double Wzmax = 0.0; // максимальное напряжение на поверхности рабочей части образца при отклонееии S_tau [Па]
     double I2_z = b_p*b_p*b_p*a_p/12.0; // момент инерции сечения поводка A<=z<=L
-	
+
+    double I1_z_const = 2.0*b*b*b/3.0;
     double z=0.0;
     while (z < L+dz) {
         if (z < Lp) {
             double y = y_0-sqrt(R*R-(z-z_0)*(z-z_0));
-            double I1_z = 2.0*b*b*b*y/3.0;
+            double I1_z = I1_z_const*y;
             double Wz = ((P*(L-z))/I1_z)*y/1.0e+6;
             if (Wz > Wzmax) Wzmax = Wz;
 
@@ -144,7 +152,11 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     ui->textBrowser->append("v max = "+QString::number(W_tau*1000.0)+" мм при приложении силы P = "+QString::number(P)+" Н,");
     ui->textBrowser->append("σ max = "+QString::number(Wzmax)+" МПа при приложении силы P = "+QString::number(P)+" Н,");
     ui->textBrowser->append("Прогиб v при "+QString::number(stress/1e+6)+" МПа равен "+QString::number(deflection*1000)+" мм,");
-    ui->textBrowser->append("Сила на конце поводка при прогибе v равна "+QString::number(P*stress/(Wzmax*1e+6))+ " Н\n");
+    ui->textBrowser->append("Сила на конце поводка при прогибе v равна "+QString::number(P*stress/(Wzmax*1e+6))+ " Н,");
+
+    // Время окончания расчёта
+    double finishCalc = clock();
+    ui->textBrowser->append("Время расчёта: "+QString::number((finishCalc-startCalc)/CLOCKS_PER_SEC)+" сек.\n");
 }
 
 void MainWindow::on_pushButton_clear_clicked(bool checked) {

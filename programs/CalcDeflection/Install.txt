@@ -1,6 +1,6 @@
 Сборка программы CalcDeflection
 
-Для сборки потребутеся: GCC, QT6, Сmake 3.2
+Для сборки потребутеся: GCC 8.1, Qt5/Qt6, Сmake 3.5
 
 1) Создаём дирректорию для сборки
 mkdir build
@@ -8,8 +8,78 @@ mkdir build
 2) Создаём в директории build служебные файлы CMakeCashe
 cmake -S . -B build/
 
-3) Собираем бинарный файл программы в 4 потока
-cmake --build build/ -- -j4
+3) Собираем бинарный файл программы в 8 потоков
+cmake --build build/ -- -j8
+# или
+cmake --build build/ --parallel 8
 
-// или в один поток
+# или в один поток
 cmake --build build/
+
+# Сборка для Windows XP x32
+SET PATH=C:\Qt\Tools\MinGW\mingw32_8_1_0\bin;%PATH%
+SET PATH=C:\Qt\Qt_5.6.3\Qt_5.6.3-build\mingw81_x32\bin;%PATH%
+SET PATH=%_ROOT%\qtbase\bin;%_ROOT%\gnuwin32\bin;%PATH%
+cmake -S . -B build/ -G "MinGW Makefiles"
+cmake --build build/
+
+# Сборка для Windows 7/10/11 x64
+SET PATH=C:\Qt\Tools\MinGW\mingw64_8_1_0\bin;%PATH%
+SET PATH=C:\Qt\Qt_5.15.18\Qt_5.15.18-build\mingw81_x64\bin;%PATH%
+SET PATH=%_ROOT%\qtbase\bin;%_ROOT%\gnuwin64\bin;%PATH%
+cmake -S . -B build/ -G "MinGW Makefiles"
+cmake --build build/
+
+# Сборка для Windows 10/11 x64
+SET PATH=C:\Qt\Tools\MinGW\mingw64_15_2_0\bin;%PATH%
+SET PATH=C:\Qt\Qt_6.10.0\Qt_6.10.0-build\mingw152_x64\bin;%PATH%
+SET PATH=%_ROOT%\qtbase\bin;%_ROOT%\gnuwin64\bin;%PATH%
+cmake -S . -B build/ -G "MinGW Makefiles"
+cmake --build build/
+
+
+
+# Примечание
+
+1) С помощью флага приведённого ниже можно собрать dll библиотки MinGW (gcc, std и прочее)
+в исполняемый файл проекта, но если в проекти используются уже собранные сторонние библиотеки
+которые имеют в себе эти же библиотеки MinGW это приведёт к росту размера исполняемого файла и
+к тому что собранная программа будет требовать эти библиотке не взирая на то что была
+проведена статическая сборка всего проекта. Поэтому данный способ можно использовать в простых
+проектах, а в сложных лучше копировать все dll файлы отдельно не перегружая ими исполняемый файл
+или создать отдельную динамическую библиотку содержащую все необходимые файлы.
+
+# Для Windows (MinGW)
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++ -static")
+# Для Linux (GCC, С++)
+set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ ${CMAKE_CXX_STANDARD_LIBRARIES}")
+target_link_libraries("SampleProject" PUBLIC "Engine" -static-libgcc -static-libstdc++)
+
+2) Различия в сборке проекта для разный версий Qt можно реализовать в CMAKE двумя
+способами с помощью комманды if()
+ 
+if(QT_VERSION_MAJOR EQUAL 5)
+	message(STATUS Qt${QT_VERSION_MAJOR} " found")
+endif()
+if(QT_VERSION_MAJOR EQUAL 6)
+	message(STATUS Qt${QT_VERSION_MAJOR} " found")
+endif()
+
+# или специализированной команды Qt*_FOUND
+
+if(Qt5_FOUND)
+	message(STATUS Qt${QT_VERSION_MAJOR} " found")
+endif()
+if(Qt6_FOUND)
+	message(STATUS Qt${QT_VERSION_MAJOR} " found")
+endif()
+
+3) Для уменьшения размера исполняемого файла и динамических библиотек а так же для увеличения
+скорости выполнения программы (особенно важно для численного моделирования) можно сделать оптимизацию:
+-O0, -O, -O1,-O2 -O3 где число обозначет уровень опимизации от выключенной оптимизации до самой большой 3.
+Оптимизация так же приводит к увеличению времени сборки проекта. Так же можно сделать оптимизацию
+под конкретную архитектуру процессора -march=*, где * название архитектуры процессора, но
+это стоит делать только при сборке проета под конкретную компьютер для общего использования такую
+оптимизацию делать нельзя. Подробности по флагам оптимизации можно посмотреть в документации GCC.
+
+set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=broadwell -O3")
