@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.5)
 
-project(CalcDeflection VERSION 0.1 LANGUAGES CXX)
+project(CalcDeflection VERSION 0.2 LANGUAGES CXX)
 
 set(CMAKE_AUTOUIC ON)
 set(CMAKE_AUTOMOC ON)
@@ -62,17 +62,16 @@ if(${WIN32})
     endif()
 endif()
 
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=broadwell -O3")
-#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=bdver1 -O3")
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=broadwell -O3") # Intel Core i7-6900K
+#set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=bdver1 -O3") # AMD FX-8150
 set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE TRUE)
 target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
 
-#include(GNUInstallDirs)
+include(GNUInstallDirs)
 install(TARGETS ${PROJECT_NAME}
     BUNDLE DESTINATION .
     LIBRARY DESTINATION ${CMAKE_INSTALL_LIBDIR}
     RUNTIME DESTINATION ${CMAKE_INSTALL_BINDIR}
-    #RESOURCE DESTINATION ${CMAKE_INSTALL_LIBDIR}
 )
 
 if(QT_VERSION_MAJOR EQUAL 6)

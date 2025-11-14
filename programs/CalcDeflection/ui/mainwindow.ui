@@ -28,26 +28,23 @@
          </property>
          <layout class="QGridLayout" name="gridLayout">
           <item row="0" column="0">
+           <widget class="QLabel" name="label_26">
+            <property name="text">
+             <string>Направление силы</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QComboBox" name="comboBox_directionForce"/>
+          </item>
+          <item row="1" column="0">
            <widget class="QLabel" name="label">
             <property name="text">
              <string>Длина рабочей части (Lp)</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <spacer name="horizontalSpacer">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>52</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="0" column="2">
+          <item row="1" column="2">
            <widget class="QDoubleSpinBox" name="doubleSpinBox_Lp">
             <property name="maximum">
              <double>100.000000000000000</double>
@@ -57,34 +54,21 @@
             </property>
            </widget>
           </item>
-          <item row="0" column="3">
+          <item row="1" column="3">
            <widget class="QLabel" name="label_2">
             <property name="text">
              <string>мм</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
+          <item row="2" column="0">
            <widget class="QLabel" name="label_7">
             <property name="text">
              <string>Ширина образца (H)</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <spacer name="horizontalSpacer_2">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>52</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="2">
+          <item row="2" column="2">
            <widget class="QDoubleSpinBox" name="doubleSpinBox_H">
             <property name="maximum">
              <double>100.000000000000000</double>
@@ -94,34 +78,21 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="3">
+          <item row="2" column="3">
            <widget class="QLabel" name="label_3">
             <property name="text">
              <string>мм</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="3" column="0">
            <widget class="QLabel" name="label_8">
             <property name="text">
              <string>Толщина образца (b)</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <spacer name="horizontalSpacer_3">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>52</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="2" column="2">
+          <item row="3" column="2">
            <widget class="QDoubleSpinBox" name="doubleSpinBox_b">
             <property name="maximum">
              <double>100.000000000000000</double>
@@ -131,34 +102,21 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="3">
+          <item row="3" column="3">
            <widget class="QLabel" name="label_4">
             <property name="text">
              <string>мм</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="0">
+          <item row="4" column="0">
            <widget class="QLabel" name="label_9">
             <property name="text">
              <string>Ширина рабочей части (h)</string>
             </property>
            </widget>
           </item>
-          <item row="3" column="1">
-           <spacer name="horizontalSpacer_4">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>52</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="3" column="2">
+          <item row="4" column="2">
            <widget class="QDoubleSpinBox" name="doubleSpinBox_h">
             <property name="maximum">
              <double>100.000000000000000</double>
@@ -168,21 +126,38 @@
             </property>
            </widget>
           </item>
-          <item row="3" column="3">
+          <item row="4" column="3">
            <widget class="QLabel" name="label_5">
             <property name="text">
              <string>мм</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="label_10">
             <property name="text">
              <string>Модуль Юнга (E1)</string>
             </property>
            </widget>
           </item>
-          <item row="4" column="1">
+          <item row="5" column="2">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_E1">
+            <property name="maximum">
+             <double>10000.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="3">
+           <widget class="QLabel" name="label_6">
+            <property name="text">
+             <string>ГПа</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" rowspan="5">
            <spacer name="horizontalSpacer_5">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -194,23 +169,6 @@
              </size>
             </property>
            </spacer>
-          </item>
-          <item row="4" column="2">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_E1">
-            <property name="maximum">
-             <double>10000.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.100000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="4" column="3">
-           <widget class="QLabel" name="label_6">
-            <property name="text">
-             <string>ГПа</string>
-            </property>
-           </widget>
           </item>
          </layout>
         </widget>
@@ -229,13 +187,136 @@
          </property>
          <layout class="QGridLayout" name="gridLayout_2">
           <item row="0" column="0">
+           <widget class="QLabel" name="label_17">
+            <property name="text">
+             <string>Форма сечения</string>
+            </property>
+           </widget>
+          </item>
+          <item row="0" column="1" colspan="2">
+           <widget class="QComboBox" name="comboBox_selectType_p"/>
+          </item>
+          <item row="1" column="0">
            <widget class="QLabel" name="label_11">
             <property name="text">
              <string>Длина (Lh)</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
+          <item row="1" column="2">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_Lh">
+            <property name="maximum">
+             <double>200.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="3">
+           <widget class="QLabel" name="label_12">
+            <property name="text">
+             <string>мм</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QLabel" name="label_Dp">
+            <property name="text">
+             <string>Диаметр (Dp)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="2">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_Dp">
+            <property name="maximum">
+             <double>100.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="3">
+           <widget class="QLabel" name="label_Dp_mm">
+            <property name="text">
+             <string>мм</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_a_p">
+            <property name="text">
+             <string>Толщина (a_p)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="2">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_a_p">
+            <property name="maximum">
+             <double>100.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="3">
+           <widget class="QLabel" name="label_a_p_mm">
+            <property name="text">
+             <string>мм</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_b_p">
+            <property name="text">
+             <string>Высота (b_p)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="2">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_b_p">
+            <property name="maximum">
+             <double>100.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.010000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="4" column="3">
+           <widget class="QLabel" name="label_b_p_mm">
+            <property name="text">
+             <string>мм</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="0">
+           <widget class="QLabel" name="label_19">
+            <property name="text">
+             <string>Модуль Юнга (E2)</string>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="2">
+           <widget class="QDoubleSpinBox" name="doubleSpinBox_E2">
+            <property name="maximum">
+             <double>10000.000000000000000</double>
+            </property>
+            <property name="singleStep">
+             <double>0.100000000000000</double>
+            </property>
+           </widget>
+          </item>
+          <item row="5" column="3">
+           <widget class="QLabel" name="label_20">
+            <property name="text">
+             <string>ГПа</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="1" rowspan="5">
            <spacer name="horizontalSpacer_6">
             <property name="orientation">
              <enum>Qt::Horizontal</enum>
@@ -248,134 +329,6 @@
             </property>
            </spacer>
           </item>
-          <item row="0" column="2">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_Lh">
-            <property name="maximum">
-             <double>100.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.010000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="0" column="3">
-           <widget class="QLabel" name="label_12">
-            <property name="text">
-             <string>мм</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_13">
-            <property name="text">
-             <string>Толщина (a_p)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="1">
-           <spacer name="horizontalSpacer_7">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="2">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_a_p">
-            <property name="maximum">
-             <double>100.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.010000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="1" column="3">
-           <widget class="QLabel" name="label_14">
-            <property name="text">
-             <string>мм</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="0">
-           <widget class="QLabel" name="label_15">
-            <property name="text">
-             <string>Высота (b_p)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="1">
-           <spacer name="horizontalSpacer_8">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="2" column="2">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_b_p">
-            <property name="maximum">
-             <double>100.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.010000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="2" column="3">
-           <widget class="QLabel" name="label_16">
-            <property name="text">
-             <string>мм</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="0">
-           <widget class="QLabel" name="label_19">
-            <property name="text">
-             <string>Модуль Юнга (E2)</string>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="1">
-           <spacer name="horizontalSpacer_10">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="3" column="2">
-           <widget class="QDoubleSpinBox" name="doubleSpinBox_E2">
-            <property name="maximum">
-             <double>10000.000000000000000</double>
-            </property>
-            <property name="singleStep">
-             <double>0.100000000000000</double>
-            </property>
-           </widget>
-          </item>
-          <item row="3" column="3">
-           <widget class="QLabel" name="label_20">
-            <property name="text">
-             <string>ГПа</string>
-            </property>
-           </widget>
-          </item>
          </layout>
         </widget>
        </item>
@@ -385,27 +338,35 @@
           <string>Результаты калибровки и параметры испытания</string>
          </property>
          <layout class="QGridLayout" name="gridLayout_3">
-          <item row="0" column="0">
-           <widget class="QLabel" name="label_21">
+          <item row="0" column="0" colspan="2">
+           <widget class="QCheckBox" name="checkBox_force1N">
+            <property name="text">
+             <string>Прогиб при силе один Ньютон</string>
+            </property>
+           </widget>
+          </item>
+          <item row="1" column="0">
+           <widget class="QCheckBox" name="checkBox_calcTime">
+            <property name="text">
+             <string>Время расчёта</string>
+            </property>
+           </widget>
+          </item>
+          <item row="2" column="0">
+           <widget class="QCheckBox" name="checkBox_calibCoeff">
+            <property name="text">
+             <string>Параметры калибровки</string>
+            </property>
+           </widget>
+          </item>
+          <item row="3" column="0">
+           <widget class="QLabel" name="label_coeff_k">
             <property name="text">
              <string>Коэффициент (k)</string>
             </property>
            </widget>
           </item>
-          <item row="0" column="1">
-           <spacer name="horizontalSpacer_11">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>40</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="0" column="2">
+          <item row="3" column="2">
            <widget class="QDoubleSpinBox" name="doubleSpinBox_coeff_k">
             <property name="decimals">
              <number>4</number>
@@ -421,27 +382,14 @@
             </property>
            </widget>
           </item>
-          <item row="1" column="0">
-           <widget class="QLabel" name="label_22">
+          <item row="4" column="0">
+           <widget class="QLabel" name="label_coeff_b">
             <property name="text">
              <string>Коэффициент (b)</string>
             </property>
            </widget>
           </item>
-          <item row="1" column="1">
-           <spacer name="horizontalSpacer_12">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>1</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="1" column="2">
+          <item row="4" column="2">
            <widget class="QDoubleSpinBox" name="doubleSpinBox_coeff_b">
             <property name="decimals">
              <number>4</number>
@@ -457,27 +405,14 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="0">
+          <item row="5" column="0">
            <widget class="QLabel" name="label_23">
             <property name="text">
              <string>Напряжение на образце (σ)</string>
             </property>
            </widget>
           </item>
-          <item row="2" column="1">
-           <spacer name="horizontalSpacer_13">
-            <property name="orientation">
-             <enum>Qt::Horizontal</enum>
-            </property>
-            <property name="sizeHint" stdset="0">
-             <size>
-              <width>1</width>
-              <height>20</height>
-             </size>
-            </property>
-           </spacer>
-          </item>
-          <item row="2" column="2">
+          <item row="5" column="2">
            <widget class="QDoubleSpinBox" name="doubleSpinBox_stress">
             <property name="maximum">
              <double>1000000.000000000000000</double>
@@ -487,12 +422,25 @@
             </property>
            </widget>
           </item>
-          <item row="2" column="3">
+          <item row="5" column="3">
            <widget class="QLabel" name="label_24">
             <property name="text">
              <string>МПа</string>
             </property>
            </widget>
+          </item>
+          <item row="3" column="1" rowspan="3">
+           <spacer name="horizontalSpacer_11">
+            <property name="orientation">
+             <enum>Qt::Horizontal</enum>
+            </property>
+            <property name="sizeHint" stdset="0">
+             <size>
+              <width>40</width>
+              <height>20</height>
+             </size>
+            </property>
+           </spacer>
           </item>
          </layout>
         </widget>

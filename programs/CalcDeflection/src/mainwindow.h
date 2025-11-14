@@ -19,7 +19,6 @@ public:
     ~MainWindow();
 
 private:
-    //TSTranslator translator;
     Ui::MainWindow *ui;
 
     unsigned int calcResultId = 0;
@@ -29,6 +28,10 @@ private:
 
 protected:
     void closeEvent(QCloseEvent *close);
+
+protected slots:
+    void slotSelectType_p(int index);
+    void slotCalibCoeffChecked(bool checked);
 
 private Q_SLOTS:
 

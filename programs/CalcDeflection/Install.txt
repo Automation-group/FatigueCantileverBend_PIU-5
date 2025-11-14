@@ -1,6 +1,6 @@
 Сборка программы CalcDeflection
 
-Для сборки потребутеся: GCC 8.1, Qt5/Qt6, Сmake 3.5
+Для сборки потребутеся: GCC, Qt5/Qt6, Сmake 3.5
 
 1) Создаём дирректорию для сборки
 mkdir build
@@ -21,25 +21,27 @@ SET PATH=C:\Qt\Tools\MinGW\mingw32_8_1_0\bin;%PATH%
 SET PATH=C:\Qt\Qt_5.6.3\Qt_5.6.3-build\mingw81_x32\bin;%PATH%
 SET PATH=%_ROOT%\qtbase\bin;%_ROOT%\gnuwin32\bin;%PATH%
 cmake -S . -B build/ -G "MinGW Makefiles"
-cmake --build build/
+cmake --build build/ --parallel 8
 
 # Сборка для Windows 7/10/11 x64
 SET PATH=C:\Qt\Tools\MinGW\mingw64_8_1_0\bin;%PATH%
 SET PATH=C:\Qt\Qt_5.15.18\Qt_5.15.18-build\mingw81_x64\bin;%PATH%
 SET PATH=%_ROOT%\qtbase\bin;%_ROOT%\gnuwin64\bin;%PATH%
 cmake -S . -B build/ -G "MinGW Makefiles"
-cmake --build build/
+cmake --build build/ --parallel 8
 
 # Сборка для Windows 10/11 x64
+# Данная сборка с при использовании оптимизации -O3
+# показывает самое высокое быстродействие опережая
+# сборки под Win XP/7 на 30%...100%
 SET PATH=C:\Qt\Tools\MinGW\mingw64_15_2_0\bin;%PATH%
 SET PATH=C:\Qt\Qt_6.10.0\Qt_6.10.0-build\mingw152_x64\bin;%PATH%
 SET PATH=%_ROOT%\qtbase\bin;%_ROOT%\gnuwin64\bin;%PATH%
 cmake -S . -B build/ -G "MinGW Makefiles"
-cmake --build build/
+cmake --build build/ --parallel 8
 
 
-
-# Примечание
+Примечание
 
 1) С помощью флага приведённого ниже можно собрать dll библиотки MinGW (gcc, std и прочее)
 в исполняемый файл проекта, но если в проекти используются уже собранные сторонние библиотеки
@@ -51,7 +53,7 @@ cmake --build build/
 
 # Для Windows (MinGW)
 set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -static-libgcc -static-libstdc++ -static")
-# Для Linux (GCC, С++)
+# Для Linux (GCC, G++)
 set(CMAKE_CXX_STANDARD_LIBRARIES "-static-libgcc -static-libstdc++ ${CMAKE_CXX_STANDARD_LIBRARIES}")
 target_link_libraries("SampleProject" PUBLIC "Engine" -static-libgcc -static-libstdc++)
 
@@ -65,7 +67,7 @@ if(QT_VERSION_MAJOR EQUAL 6)
 	message(STATUS Qt${QT_VERSION_MAJOR} " found")
 endif()
 
-# или специализированной команды Qt*_FOUND
+# или 
 
 if(Qt5_FOUND)
 	message(STATUS Qt${QT_VERSION_MAJOR} " found")
@@ -74,12 +76,26 @@ if(Qt6_FOUND)
 	message(STATUS Qt${QT_VERSION_MAJOR} " found")
 endif()
 
-3) Для уменьшения размера исполняемого файла и динамических библиотек а так же для увеличения
-скорости выполнения программы (особенно важно для численного моделирования) можно сделать оптимизацию:
--O0, -O, -O1,-O2 -O3 где число обозначет уровень опимизации от выключенной оптимизации до самой большой 3.
-Оптимизация так же приводит к увеличению времени сборки проекта. Так же можно сделать оптимизацию
-под конкретную архитектуру процессора -march=*, где * название архитектуры процессора, но
-это стоит делать только при сборке проета под конкретную компьютер для общего использования такую
-оптимизацию делать нельзя. Подробности по флагам оптимизации можно посмотреть в документации GCC.
+3) Измерить время выполения кода можно двумя способами с помощью билиотек ctime и chrono.
+Пользоваться ctime лучше для измерения времени от 1 секунды и более, а chrono подходит
+для измерения микро и нано секунд.
 
-set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=broadwell -O3")
+#include <chrono>
+
+// Время начала отсчёта
+auto start_time_us = std::chrono::high_resolution_clock::now();
+// *** Исполняемый код
+// Время окончания отсчёта
+auto finish_time_us = std::chrono::high_resolution_clock::now()-start_time_us;
+// Время исполнения кода в микросекундах: std::chrono::duration_cast<std::chrono::microseconds>(finish_time_us).count();
+// С помощью билиотеки chrono можно измерять время в наносекундах.
+
+#include <ctime>
+
+// Время начала отсчёта
+clock_t execution_time_s = clock();
+// *** Исполняемый код
+// Время окончания отсчёта
+execution_time_s = clock()-execution_time_s;
+// Время исполнения кода в секундах: (float)execution_time_s/CLOCKS_PER_SEC;
+// В зависимости от ОС время может быть измерено с точностью до 1 мс или 1 мкс!
