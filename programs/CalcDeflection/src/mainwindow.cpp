@@ -1,6 +1,6 @@
-#include <QtGui>
-#include <QSettings>
 #include <QtCore>
+#include <QtGui>
+#include <QInputDialog>
 #include <cmath>
 #include <chrono>
 
@@ -13,13 +13,17 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("CalcDeflection");
-
     // Загрузка иконок для кнопок и прочих изображений
     QPixmap pixItem;
     pixItem.load(":/images/drawingSampleAndLever.png");
     ui->label_plan->setPixmap(pixItem);
 
     // Инициализация сигналов и слотов
+    // Настройка шрифта
+    connect(ui->actionFormatTextSize, SIGNAL(triggered()), this, SLOT(slotFormatTextSize()));
+    connect(ui->actioтFormatTextBold, SIGNAL(toggled(bool)), this, SLOT(slotFormatTextBold(bool)));
+    connect(ui->actioтFormatTextItalic, SIGNAL(toggled(bool)), this, SLOT(slotFormatTextItalic(bool)));
+
     // Выбор направления приложения силы
     ui->comboBox_directionForce->addItem("по оси x");
     ui->comboBox_directionForce->addItem("по оси y");
@@ -29,26 +33,85 @@ MainWindow::MainWindow(QWidget *parent)
     ui->comboBox_selectType_p->addItem("круглая");
     // Учёт калибровки
     connect(ui->checkBox_calibCoeff, SIGNAL(toggled(bool)), this, SLOT(slotCalibCoeffChecked(bool)));
+    // Шага интегрирования
+    connect(ui->checkBox_integStep, SIGNAL(toggled(bool)), this, SLOT(slotIntegStepChecked(bool)));
 
     // Загрузка настроек
     settings_CalcDeflection = new QSettings("settings.conf",QSettings::IniFormat);
     loadSettings();
+	
+	// Глобальные настройка шрифта
+	//this->setFont(QFont("Arial", 10, QFont::Bold, true));
 }
 
-void MainWindow::slotCalibCoeffChecked(bool checked) {
-    if(checked){
-        ui->doubleSpinBox_coeff_k->setEnabled(true);
-        ui->doubleSpinBox_coeff_b->setEnabled(true);
-        ui->label_coeff_k->setEnabled(true);
-        ui->label_coeff_b->setEnabled(true);
+// Шрифта утолщённый
+void MainWindow::slotFormatTextBold(bool checked) {
+    text.formatTextBold = checked;
+    setFormatText();
+}
+// Шрифта курсив
+void MainWindow::slotFormatTextItalic(bool checked) {
+    text.formatTextItalic = checked;
+    setFormatText();
+}
+// Задать размер шрифта
+void MainWindow::slotFormatTextSize(){
+	bool ok{};
+    const QStringList fontSizes{"8", "9", "10", "11", "12",
+							"13", "14", "15", "16", "17",
+							"18", "19", "20"};
+    QString fontSize = QInputDialog::getItem(this, "Размер шрифта", "Размер шрифта: ", fontSizes, 1, false, &ok);
+	if(ok) {
+        text.formatTextSize = QVariant(fontSize).toInt();
+        ui->actionFormatTextSize->setText("Размер "+fontSize);
+		setFormatText();
+	}
+}
+// Задать шрифт
+void MainWindow::setFormatText() {
+    QFont mainFont;
+    mainFont.setFamily(mainFont.defaultFamily()); // задание системного шрифта по умолчанию
+    mainFont.setPointSize(text.formatTextSize); // размер шрифта в px
+    mainFont.setBold(text.formatTextBold); // утолщённый
+    mainFont.setItalic(text.formatTextItalic); // курсив
+    this->setFont(mainFont);
+    //setStyleSheet(QString("* { font: %1pp ''; }").arg(formatTextSize));
+}
+
+
+// Задать шаг интегрирования
+void MainWindow::slotIntegStepChecked(bool checked) {
+    if(checked) {
+        ui->spinBox_integStep->setEnabled(true);
     } else {
-        ui->doubleSpinBox_coeff_k->setEnabled(false);
-        ui->doubleSpinBox_coeff_b->setEnabled(false);
-        ui->label_coeff_k->setEnabled(false);
-        ui->label_coeff_b->setEnabled(false);
+        ui->spinBox_integStep->setEnabled(false);
     }
 }
 
+// Задать коэффициенты калибровки
+void MainWindow::slotCalibCoeffChecked(bool checked) {
+    if(checked) {
+        ui->doubleSpinBox_coeff_k->setEnabled(true);
+		ui->doubleSpinBox_coeff_k->setVisible(true);
+        ui->doubleSpinBox_coeff_b->setEnabled(true);
+		ui->doubleSpinBox_coeff_b->setVisible(true);
+        ui->label_coeff_k->setEnabled(true);
+		ui->label_coeff_k->setVisible(true);
+        ui->label_coeff_b->setEnabled(true);
+		ui->label_coeff_b->setVisible(true);
+    } else {
+        ui->doubleSpinBox_coeff_k->setEnabled(false);
+		ui->doubleSpinBox_coeff_k->setVisible(false);
+        ui->doubleSpinBox_coeff_b->setEnabled(false);
+		ui->doubleSpinBox_coeff_b->setVisible(false);
+        ui->label_coeff_k->setEnabled(false);
+		ui->label_coeff_k->setVisible(false);
+        ui->label_coeff_b->setEnabled(false);
+		ui->label_coeff_b->setVisible(false);
+    }
+}
+
+// Выбор прямоугольного или круглого сечения поводка
 void MainWindow::slotSelectType_p(int index){
     if(index == 0) {
         // Парамет Dp делаем не активным и не видимым
@@ -90,6 +153,14 @@ void MainWindow::loadSettings(){
     // Параметры окна
     this->restoreGeometry(settings_CalcDeflection->value("settings/mainWindowGeometry").toByteArray());
     this->restoreState(settings_CalcDeflection->value("settings/mainWindowState").toByteArray());
+    // Параметры шрифта
+    text.formatTextSize = settings_CalcDeflection->value("settings/font/fontSize").value<int>();
+    text.formatTextBold = settings_CalcDeflection->value("settings/font/fontBold").value<bool>();
+    text.formatTextItalic = settings_CalcDeflection->value("settings//font/fontItalic").value<bool>();
+    ui->actionFormatTextSize->setText("Размер "+QString::number(text.formatTextSize));
+    ui->actioтFormatTextBold->setChecked(text.formatTextBold);
+    ui->actioтFormatTextItalic->setChecked(text.formatTextItalic);
+    setFormatText();
 
     // Параметры образца
     ui->comboBox_directionForce->setCurrentIndex(settings_CalcDeflection->value("settings/dir_force").value<int>()); // направление силы (по оси y или x)
@@ -112,17 +183,25 @@ void MainWindow::loadSettings(){
     ui->doubleSpinBox_coeff_k->setValue(settings_CalcDeflection->value("settings/coeff_k").value<double>()); // чувствительность или коэффициент k при аппроксимации калибровочной зависимости прямой [ед.ацп/мкм]
     ui->doubleSpinBox_coeff_b->setValue(settings_CalcDeflection->value("settings/coeff_b").value<double>()); // смещение или коэффициент b при аппроксимации калибровочной зависимости прямой [ед.ацп/мкм]
     ui->doubleSpinBox_stress->setValue(settings_CalcDeflection->value("settings/stress").value<double>()); // напряжение на поверхности образца в эксперименте [МПа]
-
+	
     // Дополнительные параметры
     ui->checkBox_force1N->setChecked(settings_CalcDeflection->value("settings/cb_force1N").value<bool>()); // выводить данные прогиба при силе 1 Н
     ui->checkBox_calcTime->setChecked(settings_CalcDeflection->value("settings/cb_calcTime").value<bool>()); // показать время расчёта
     ui->checkBox_calibCoeff->setChecked(settings_CalcDeflection->value("settings/cb_calibCoeff").value<bool>()); // вывести коэффициенты калибровки
+    ui->checkBox_integStep->setChecked(settings_CalcDeflection->value("settings/cb_integStep").value<bool>()); // задать шаг интегрирования
+    slotIntegStepChecked(settings_CalcDeflection->value("settings/cb_integStep").value<bool>());
+	ui->spinBox_integStep->setValue(settings_CalcDeflection->value("settings/integStep").value<int>()); // шаг интегрирования по умолчанию L/1.0e+6
+	slotCalibCoeffChecked(settings_CalcDeflection->value("settings/cb_calibCoeff").value<bool>());
 }
 
 void MainWindow::saveSettings(){
     // Параметры окна
     settings_CalcDeflection->setValue("settings/mainWindowGeometry", saveGeometry());
     settings_CalcDeflection->setValue("settings/mainWindowState", saveState());
+    // Параметры шрифта
+    settings_CalcDeflection->setValue("settings/font/fontSize", text.formatTextSize);
+    settings_CalcDeflection->setValue("settings/font/fontBold", text.formatTextBold);
+    settings_CalcDeflection->setValue("settings/font/fontItalic", text.formatTextItalic);
 
     // Параметры образца
     settings_CalcDeflection->setValue("settings/dir_force", ui->comboBox_directionForce->currentIndex()); // направление силы (по оси y или x)
@@ -149,11 +228,14 @@ void MainWindow::saveSettings(){
     settings_CalcDeflection->setValue("settings/cb_force1N", ui->checkBox_force1N->isChecked()); // выводить данные прогиба при силе 1 Н
     settings_CalcDeflection->setValue("settings/cb_calcTime", ui->checkBox_calcTime->isChecked()); // показать время расчёта
     settings_CalcDeflection->setValue("settings/cb_calibCoeff", ui->checkBox_calibCoeff->isChecked()); // вывести коэффициенты калибровки
+    settings_CalcDeflection->setValue("settings/cb_integStep", ui->checkBox_integStep->isChecked()); // задать шаг интегрирования
+    settings_CalcDeflection->setValue("settings/integStep", ui->spinBox_integStep->value()); // шаг интегрирования по умолчанию L/1.0e+6
 }
 
 void MainWindow::on_pushButton_calc_clicked(bool checked){
     // Время начала отсчёта
     auto start_time_us = std::chrono::high_resolution_clock::now();
+	ui->textBrowser->append("Qt "+QVariant(qVersion()).toString());
 
     // Номер расчёта
     calcResultId++;
@@ -181,17 +263,19 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     double L = Lp + Lh; // суммарная длина поводка и образца [м]
 
     // Параметры интегрирования
-    double dz = L/1.0e+6; // шаг интегрирования
+    double dz = L/pow(10.0,ui->spinBox_integStep->value()); // шаг интегрирования (по умолчанию L/1.0e+6)
     double W_fi = 0.0; // промежуточный результат интегрирования
     double W_tau = 0.0; // максимальное отклонение [м]
     double Wzmax = 0.0; // максимальное напряжение на поверхности рабочей части образца при приложении силы P [м]
-    double I2_z = 0.0;
-    if(leash_section == 0) I2_z = b_p*b_p*b_p*a_p/12.0; // момент инерции сечения поводка A<=z<=L (поводок прямоугольного сечения)
-    if(leash_section == 1) I2_z = M_PI*Dp*Dp*Dp*Dp/64.0; // момент инерции сечения поводка A<=z<=L (поводок круглого сечения)
+    double I2_z = 0.0; // момент инерции сечения поводка A<=z<=L (поводок прямоугольного сечения)
+    if(!leash_section) 
+		if(!direction_force) I2_z = b_p*b_p*b_p*a_p/12.0; // сила направлена по оси х
+		else I2_z = a_p*a_p*a_p*b_p/12.0; // сила направлена по оси y
+    else I2_z = M_PI*Dp*Dp*Dp*Dp/64.0; // момент инерции сечения поводка A<=z<=L (поводок круглого сечения)
 
-    double I1_z_const = 0.0;
-    if (direction_force == 0) I1_z_const = 2.0*b*b*b/3.0; // смещение перпендикулярно ширине образца
-    if (direction_force == 1) I1_z_const = 2.0*b/3.0; // смещение перпендикулярно радиусу образца
+    double I1_z_const = 0.0; // момент инерции сечения образца
+    if (!direction_force) I1_z_const = 2.0*b*b*b/3.0; // смещение перпендикулярно ширине образца
+    else I1_z_const = 2.0*b/3.0; // смещение перпендикулярно радиусу образца
     double R_square = R*R;
     double P_E2_I2z_const = P/(E_2*I2_z);
     double z = 0.0;
@@ -199,8 +283,8 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
         if (z < Lp) {
             double y = y_0-sqrt(R_square-(z-z_0)*(z-z_0));
             double I1_z = 0.0;
-            if (direction_force == 0) I1_z = I1_z_const*y; // смещение перпендикулярно ширине образца
-            if (direction_force == 1) I1_z = I1_z_const*y*y*y; // смещение перпендикулярно радиусу образца
+            if (!direction_force) I1_z = I1_z_const*y; // сила направлена по оси х
+            else I1_z = I1_z_const*y*y*y; // сила направлена по оси y
             double Wz = y*P*(L-z)/(I1_z*1.0e+6);
             if (Wz > Wzmax) Wzmax = Wz;
 
@@ -252,11 +336,11 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     // Время окончания отсчёта
     auto finish_time_us = std::chrono::high_resolution_clock::now()-start_time_us;
     if(ui->checkBox_calcTime->isChecked()) {
-        ui->textBrowser->append("==================================================");
+        ui->textBrowser->append("======================================");
         ui->textBrowser->append("Время расчёта: "+QString::number(
             std::chrono::duration_cast<std::chrono::microseconds>(finish_time_us).count()/1.0e+3,'f',3)+" мс");
     }
-    ui->textBrowser->append("==================================================\n");
+    ui->textBrowser->append("======================================\n");
 }
 
 void MainWindow::on_pushButton_clear_clicked(bool checked) {

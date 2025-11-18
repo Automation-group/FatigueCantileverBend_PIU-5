@@ -25,17 +25,28 @@ private:
     QSettings *settings_CalcDeflection; // настройки программы
     void saveSettings();
     void loadSettings();
+    void setFormatText();
+    // Формат шрифта по умолчанию
+    struct defaultTextFormat{
+        int formatTextSize = 9;
+        bool formatTextBold = false;
+        bool formatTextItalic = false;
+    } text;
 
 protected:
     void closeEvent(QCloseEvent *close);
 
 protected slots:
-    void slotSelectType_p(int index);
-    void slotCalibCoeffChecked(bool checked);
+    void slotSelectType_p(int index); // выбор типа поводка
+    void slotCalibCoeffChecked(bool checked); // задать коэффициенты калибровки
+    void slotIntegStepChecked(bool checked); // задать шаг интегрирования
+    void slotFormatTextSize(); // размер шрифта
+    void slotFormatTextBold(bool checked); // шрифт обычный/жирный
+    void slotFormatTextItalic(bool checked); // шрифт обычный/курсив
 
 private Q_SLOTS:
 
-    void on_pushButton_calc_clicked(bool checked);
-    void on_pushButton_clear_clicked(bool checked);
+    void on_pushButton_calc_clicked(bool checked); // провести расчёт
+    void on_pushButton_clear_clicked(bool checked); // очистить результаты расчёта
 };
 #endif // MAINWINDOW_H
