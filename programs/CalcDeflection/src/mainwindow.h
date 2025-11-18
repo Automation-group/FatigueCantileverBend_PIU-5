@@ -40,9 +40,13 @@ protected slots:
     void slotSelectType_p(int index); // выбор типа поводка
     void slotCalibCoeffChecked(bool checked); // задать коэффициенты калибровки
     void slotIntegStepChecked(bool checked); // задать шаг интегрирования
+
     void slotFormatTextSize(); // размер шрифта
     void slotFormatTextBold(bool checked); // шрифт обычный/жирный
     void slotFormatTextItalic(bool checked); // шрифт обычный/курсив
+
+    void slotHelp(); // информация о программе
+    void slotProgInfo(); // алгоритм расчтёта
 
 private Q_SLOTS:
 

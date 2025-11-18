@@ -17,9 +17,12 @@ set(PROJECT_SOURCES
     src/main.cpp
     src/mainwindow.cpp
     src/mainwindow.h
+    #src/infoDialog.cpp
+    #src/infoDialog.h
 )
 set(PROJECT_UI
     ui/mainwindow.ui
+    #ui/infoWindow.ui
 )
 set(RESOURCE_FILES
     res/application.qrc
@@ -28,7 +31,8 @@ set(RESOURCE_FILES
 
 # Assembly differeces for Qt5 and Qt6
 if(Qt6_FOUND)
-    qt_add_executable(${PROJECT_NAME} MANUAL_FINALIZATION ${PROJECT_SOURCES} ${PROJECT_UI} ${RESOURCE_FILES})
+    qt_add_executable(${PROJECT_NAME} MANUAL_FINALIZATION ${PROJECT_SOURCES} ${PROJECT_UI} ${RESOURCE_FILES}
+        ui/infoWindow.ui)
 endif()
 if(Qt5_FOUND)
     add_executable(${PROJECT_NAME} WIN32 ${PROJECT_SOURCES} ${PROJECT_UI} ${RESOURCE_FILES})

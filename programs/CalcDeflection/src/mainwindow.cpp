@@ -36,14 +36,28 @@ MainWindow::MainWindow(QWidget *parent)
     // Шага интегрирования
     connect(ui->checkBox_integStep, SIGNAL(toggled(bool)), this, SLOT(slotIntegStepChecked(bool)));
 
+    // Информация о программе и алгоритм расчёта
+    connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(slotHelp()));
+    connect(ui->actionProgInfo, SIGNAL(triggered()), this, SLOT(slotProgInfo()));
+
     // Загрузка настроек
     settings_CalcDeflection = new QSettings("settings.conf",QSettings::IniFormat);
     loadSettings();
 	
 	// Глобальные настройка шрифта
 	//this->setFont(QFont("Arial", 10, QFont::Bold, true));
+    //setStyleSheet(QString("* { font: %1pp ''; }").arg(formatTextSize));
 }
 
+// Вызов окна с информацией о программе
+void MainWindow::slotHelp() {
+    ui->textBrowser->append("Qt "+QVariant(qVersion()).toString());
+}
+
+// Вызов pdf файла с алгоритмом расчёта
+void MainWindow::slotProgInfo() {
+    ui->textBrowser->append("CalcDeflection.pdf");
+}
 // Шрифта утолщённый
 void MainWindow::slotFormatTextBold(bool checked) {
     text.formatTextBold = checked;
@@ -58,8 +72,8 @@ void MainWindow::slotFormatTextItalic(bool checked) {
 void MainWindow::slotFormatTextSize(){
 	bool ok{};
     const QStringList fontSizes{"8", "9", "10", "11", "12",
-							"13", "14", "15", "16", "17",
-							"18", "19", "20"};
+                                "13", "14", "15", "16", "17",
+                                "18", "19", "20"};
     QString fontSize = QInputDialog::getItem(this, "Размер шрифта", "Размер шрифта: ", fontSizes, 1, false, &ok);
 	if(ok) {
         text.formatTextSize = QVariant(fontSize).toInt();
@@ -75,7 +89,6 @@ void MainWindow::setFormatText() {
     mainFont.setBold(text.formatTextBold); // утолщённый
     mainFont.setItalic(text.formatTextItalic); // курсив
     this->setFont(mainFont);
-    //setStyleSheet(QString("* { font: %1pp ''; }").arg(formatTextSize));
 }
 
 
@@ -115,8 +128,8 @@ void MainWindow::slotCalibCoeffChecked(bool checked) {
 void MainWindow::slotSelectType_p(int index){
     if(index == 0) {
         // Парамет Dp делаем не активным и не видимым
-        ui->doubleSpinBox_Dp->setEnabled(false);
-        ui->doubleSpinBox_Dp->setVisible(false);
+        ui->doubleSpinBox_D_p->setEnabled(false);
+        ui->doubleSpinBox_D_p->setVisible(false);
         ui->label_Dp->setVisible(false);
         ui->label_Dp_mm->setVisible(false);
         // Парамет a_p делаем не активным и не видимым
@@ -132,8 +145,8 @@ void MainWindow::slotSelectType_p(int index){
     }
     if(index == 1) {
         // Парамет Dp делаем активным и видимым
-        ui->doubleSpinBox_Dp->setEnabled(true);
-        ui->doubleSpinBox_Dp->setVisible(true);
+        ui->doubleSpinBox_D_p->setEnabled(true);
+        ui->doubleSpinBox_D_p->setVisible(true);
         ui->label_Dp->setVisible(true);
         ui->label_Dp_mm->setVisible(true);
         // Парамет a_p делаем активным и видимым
@@ -156,7 +169,7 @@ void MainWindow::loadSettings(){
     // Параметры шрифта
     text.formatTextSize = settings_CalcDeflection->value("settings/font/fontSize").value<int>();
     text.formatTextBold = settings_CalcDeflection->value("settings/font/fontBold").value<bool>();
-    text.formatTextItalic = settings_CalcDeflection->value("settings//font/fontItalic").value<bool>();
+    text.formatTextItalic = settings_CalcDeflection->value("settings/font/fontItalic").value<bool>();
     ui->actionFormatTextSize->setText("Размер "+QString::number(text.formatTextSize));
     ui->actioтFormatTextBold->setChecked(text.formatTextBold);
     ui->actioтFormatTextItalic->setChecked(text.formatTextItalic);
@@ -164,19 +177,19 @@ void MainWindow::loadSettings(){
 
     // Параметры образца
     ui->comboBox_directionForce->setCurrentIndex(settings_CalcDeflection->value("settings/dir_force").value<int>()); // направление силы (по оси y или x)
-    ui->doubleSpinBox_Lp->setValue(settings_CalcDeflection->value("settings/Lp").value<double>()); // длина рабочей части [мм]
-    ui->doubleSpinBox_H->setValue(settings_CalcDeflection->value("settings/H_p").value<double>()); // ширина образца [мм]
-    ui->doubleSpinBox_b->setValue(settings_CalcDeflection->value("settings/b").value<double>()); // толщина образца [мм]
-    ui->doubleSpinBox_h->setValue(settings_CalcDeflection->value("settings/h").value<double>()); // ширина рабочей части [мм]
+    ui->doubleSpinBox_L_s->setValue(settings_CalcDeflection->value("settings/L_s").value<double>()); // длина рабочей части [мм]
+    ui->doubleSpinBox_H_s->setValue(settings_CalcDeflection->value("settings/H_s").value<double>()); // ширина образца [мм]
+    ui->doubleSpinBox_b_s->setValue(settings_CalcDeflection->value("settings/b_s").value<double>()); // толщина образца [мм]
+    ui->doubleSpinBox_h_s->setValue(settings_CalcDeflection->value("settings/h_s").value<double>()); // ширина рабочей части [мм]
     ui->doubleSpinBox_E1->setValue(settings_CalcDeflection->value("settings/E1").value<double>()); // модуль Юнга образца [ГПа]
 
     // Параметры поводка
     ui->comboBox_selectType_p->setCurrentIndex(settings_CalcDeflection->value("settings/type_p").value<int>()); // сечение поводка (прямоугольное или круглое)
     slotSelectType_p(settings_CalcDeflection->value("settings/type_p").value<int>());
-    ui->doubleSpinBox_Lh->setValue(settings_CalcDeflection->value("settings/Lh").value<double>()); // длина поводка [мм]
+    ui->doubleSpinBox_L_p->setValue(settings_CalcDeflection->value("settings/L_p").value<double>()); // длина поводка [мм]
     ui->doubleSpinBox_a_p->setValue(settings_CalcDeflection->value("settings/a_p").value<double>()); // толщина поводка [мм] (прямоугольное сечение)
     ui->doubleSpinBox_b_p->setValue(settings_CalcDeflection->value("settings/b_p").value<double>()); // высота поводка [мм] (прямоугольное сечение)
-    ui->doubleSpinBox_Dp->setValue(settings_CalcDeflection->value("settings/Dp").value<double>()); // диаметр поводка [мм] (круголое сечение)
+    ui->doubleSpinBox_D_p->setValue(settings_CalcDeflection->value("settings/D_p").value<double>()); // диаметр поводка [мм] (круголое сечение)
     ui->doubleSpinBox_E2->setValue(settings_CalcDeflection->value("settings/E2").value<double>()); // модуль Юнга поводка из титана [ГПа]
 
     // Результаты калибровки и параметры испытания
@@ -205,18 +218,18 @@ void MainWindow::saveSettings(){
 
     // Параметры образца
     settings_CalcDeflection->setValue("settings/dir_force", ui->comboBox_directionForce->currentIndex()); // направление силы (по оси y или x)
-    settings_CalcDeflection->setValue("settings/Lp", ui->doubleSpinBox_Lp->value()); // длина рабочей части [мм]
-    settings_CalcDeflection->setValue("settings/H_p", ui->doubleSpinBox_H->value()); // ширина образца [мм]
-    settings_CalcDeflection->setValue("settings/b", ui->doubleSpinBox_b->value()); // толщина образца [мм]
-    settings_CalcDeflection->setValue("settings/h", ui->doubleSpinBox_h->value()); // ширина рабочей части [мм]
+    settings_CalcDeflection->setValue("settings/L_s", ui->doubleSpinBox_L_s->value()); // длина рабочей части [мм]
+    settings_CalcDeflection->setValue("settings/H_s", ui->doubleSpinBox_H_s->value()); // ширина образца [мм]
+    settings_CalcDeflection->setValue("settings/b_s", ui->doubleSpinBox_b_s->value()); // толщина образца [мм]
+    settings_CalcDeflection->setValue("settings/h_s", ui->doubleSpinBox_h_s->value()); // ширина рабочей части [мм]
     settings_CalcDeflection->setValue("settings/E1", ui->doubleSpinBox_E1->value()); // модуль Юнга образца [ГПа]
 
     // Параметры поводка
     settings_CalcDeflection->setValue("settings/type_p", ui->comboBox_selectType_p->currentIndex()); // сечение поводка (прямоугольное или круглое)
-    settings_CalcDeflection->setValue("settings/Lh", ui->doubleSpinBox_Lh->value()); // длина поводка [мм]
+    settings_CalcDeflection->setValue("settings/L_p", ui->doubleSpinBox_L_p->value()); // длина поводка [мм]
     settings_CalcDeflection->setValue("settings/a_p", ui->doubleSpinBox_a_p->value()); // толщина поводка [мм] (прямоугольное сечение)
     settings_CalcDeflection->setValue("settings/b_p", ui->doubleSpinBox_b_p->value()); // высота поводка [мм] (прямоугольное сечение)
-    settings_CalcDeflection->setValue("settings/Dp", ui->doubleSpinBox_Dp->value()); // диаметр поводка [мм] (круголое сечение)
+    settings_CalcDeflection->setValue("settings/D_p", ui->doubleSpinBox_D_p->value()); // диаметр поводка [мм] (круголое сечение)
     settings_CalcDeflection->setValue("settings/E2", ui->doubleSpinBox_E2->value()); // модуль Юнга поводка из титана [ГПа]
 
     // Результаты калибровки и параметры испытания
@@ -235,7 +248,6 @@ void MainWindow::saveSettings(){
 void MainWindow::on_pushButton_calc_clicked(bool checked){
     // Время начала отсчёта
     auto start_time_us = std::chrono::high_resolution_clock::now();
-	ui->textBrowser->append("Qt "+QVariant(qVersion()).toString());
 
     // Номер расчёта
     calcResultId++;
@@ -243,24 +255,24 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     int leash_section = ui->comboBox_selectType_p->currentIndex();
 
     // Параметры образца
-    double Lp = ui->doubleSpinBox_Lp->value()/1000.0; // длина рабочей части [м]
-    double H = ui->doubleSpinBox_H->value()/1000.0; // ширина образца [м]
-    double b = ui->doubleSpinBox_b->value()/1000.0; // толщина образца [м]
-    double h = ui->doubleSpinBox_h->value()/1000.0; // ширина рабочей части [м]
+    double L_s = ui->doubleSpinBox_L_s->value()/1000.0; // длина рабочей части [м]
+    double H_s = ui->doubleSpinBox_H_s->value()/1000.0; // ширина образца [м]
+    double b_s = ui->doubleSpinBox_b_s->value()/1000.0; // толщина образца [м]
+    double h_s = ui->doubleSpinBox_h_s->value()/1000.0; // ширина рабочей части [м]
     double E_1 = ui->doubleSpinBox_E1->value()*1.0e+9; // модуль Юнга образца [Па]
 
-    double R = (Lp*Lp+(H-h)*(H-h))/(4.0*(H-h)); // радиус образца [м]
-    double z_0 = Lp/2.0; // расстояние от центра радиуса до 0 по оси z [м]
-    double y_0 = R + h/2.0; // расстояние от центра радиуса до 0 по оси y [м]
+    double R_s = (L_s*L_s+(H_s-h_s)*(H_s-h_s))/(4.0*(H_s-h_s)); // радиус образца [м]
+    double z_0 = L_s/2.0; // расстояние от центра радиуса до 0 по оси z [м]
+    double y_0 = R_s + h_s/2.0; // расстояние от центра радиуса до 0 по оси y [м]
 
     // Параметры поводка
-    double Lh = ui->doubleSpinBox_Lh->value()/1000.0;  // длина поводка [м]
+    double L_p = ui->doubleSpinBox_L_p->value()/1000.0;  // длина поводка [м]
     double a_p = ui->doubleSpinBox_a_p->value()/1000.0; // толщина прямоугольного поводка [м]
     double b_p = ui->doubleSpinBox_b_p->value()/1000.0; // высота прямоугольного поводка [м]
-    double Dp = ui->doubleSpinBox_Dp->value()/1000.0; // диаметр круглого поводка [м]
+    double D_p = ui->doubleSpinBox_D_p->value()/1000.0; // диаметр круглого поводка [м]
     double E_2 = ui->doubleSpinBox_E2->value()*1.0e+9; // модуль Юнга поводка из титана [Па]
     double P = 1.0; // сила приложенная к концу поводка [H] (используется в расчёте и измерять её не нужно)
-    double L = Lp + Lh; // суммарная длина поводка и образца [м]
+    double L = L_s + L_p; // суммарная длина поводка и образца [м]
 
     // Параметры интегрирования
     double dz = L/pow(10.0,ui->spinBox_integStep->value()); // шаг интегрирования (по умолчанию L/1.0e+6)
@@ -271,16 +283,16 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     if(!leash_section) 
 		if(!direction_force) I2_z = b_p*b_p*b_p*a_p/12.0; // сила направлена по оси х
 		else I2_z = a_p*a_p*a_p*b_p/12.0; // сила направлена по оси y
-    else I2_z = M_PI*Dp*Dp*Dp*Dp/64.0; // момент инерции сечения поводка A<=z<=L (поводок круглого сечения)
+    else I2_z = M_PI*D_p*D_p*D_p*D_p/64.0; // момент инерции сечения поводка A<=z<=L (поводок круглого сечения)
 
     double I1_z_const = 0.0; // момент инерции сечения образца
-    if (!direction_force) I1_z_const = 2.0*b*b*b/3.0; // смещение перпендикулярно ширине образца
-    else I1_z_const = 2.0*b/3.0; // смещение перпендикулярно радиусу образца
-    double R_square = R*R;
+    if (!direction_force) I1_z_const = 2.0*b_s*b_s*b_s/3.0; // смещение перпендикулярно ширине образца
+    else I1_z_const = 2.0*b_s/3.0; // смещение перпендикулярно радиусу образца
+    double R_square = R_s*R_s;
     double P_E2_I2z_const = P/(E_2*I2_z);
     double z = 0.0;
     while (z < L+dz) {
-        if (z < Lp) {
+        if (z < L_s) {
             double y = y_0-sqrt(R_square-(z-z_0)*(z-z_0));
             double I1_z = 0.0;
             if (!direction_force) I1_z = I1_z_const*y; // сила направлена по оси х
@@ -303,21 +315,21 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
 
     // Размеры и модуль Юнга образца
     ui->textBrowser->append("ОБРАЗЕЦ (РАСЧЁТ №"+QString::number(calcResultId)+")");
-    ui->textBrowser->append("Длина рабочей части Lp = "+QString::number(Lp*1000.0)+" мм," );
-    ui->textBrowser->append("Ширина образца H = "+QString::number(H*1000.0)+" мм," );
-    ui->textBrowser->append("Толщина образца b = "+QString::number(b*1000.0)+" мм," );
-    ui->textBrowser->append("Ширина рабочей части h = "+QString::number(h*1000.0)+" мм," );
+    ui->textBrowser->append("Длина рабочей части L_s = "+QString::number(L_s*1000.0)+" мм," );
+    ui->textBrowser->append("Ширина образца H_s = "+QString::number(H_s*1000.0)+" мм," );
+    ui->textBrowser->append("Толщина образца b_s = "+QString::number(b_s*1000.0)+" мм," );
+    ui->textBrowser->append("Ширина рабочей части h_s = "+QString::number(h_s*1000.0)+" мм," );
     ui->textBrowser->append("Модуль Юнга образца E1 = "+QString::number(E_1/1.0e+9)+" ГПа\n" );
 
     // Размеры и модуль Юнга поводка
     ui->textBrowser->append("ПОВОДОК (РАСЧЁТ №"+QString::number(calcResultId)+")");
-    ui->textBrowser->append("Длина поводка Lh = "+QString::number(Lh*1000.0)+" мм," );
+    ui->textBrowser->append("Длина поводка L_p = "+QString::number(L_p*1000.0)+" мм," );
     if (leash_section == 0) {
         ui->textBrowser->append("Толщина поводка a_p = "+QString::number(a_p*1000.0)+" мм," );
         ui->textBrowser->append("Высота поводка b_p = "+QString::number(b_p*1000.0)+" мм," );
     }
     if (leash_section == 1) {
-        ui->textBrowser->append("Диаметр поводка Dp = "+QString::number(Dp*1000.0)+" мм," );
+        ui->textBrowser->append("Диаметр поводка D_p = "+QString::number(D_p*1000.0)+" мм," );
     }
     ui->textBrowser->append("Модуль Юнга поводка E2 = "+QString::number(E_2/1.0e+9)+" ГПа\n" );
 
