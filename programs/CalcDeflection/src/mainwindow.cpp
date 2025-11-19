@@ -21,8 +21,10 @@ MainWindow::MainWindow(QWidget *parent)
     // Инициализация сигналов и слотов
     // Настройка шрифта
     connect(ui->actionFormatTextSize, SIGNAL(triggered()), this, SLOT(slotFormatTextSize()));
-    connect(ui->actioтFormatTextBold, SIGNAL(toggled(bool)), this, SLOT(slotFormatTextBold(bool)));
-    connect(ui->actioтFormatTextItalic, SIGNAL(toggled(bool)), this, SLOT(slotFormatTextItalic(bool)));
+    connect(ui->actionFormatTextBold, SIGNAL(toggled(bool)), this, SLOT(slotFormatTextBold(bool)));
+    connect(ui->actionFormatTextItalic, SIGNAL(toggled(bool)), this, SLOT(slotFormatTextItalic(bool)));
+    ui->actionFormatTextBold->setIcon(QIcon(":images/format-text-bold-symbolic.svg"));
+    ui->actionFormatTextItalic->setIcon(QIcon(":images/format-text-italic-symbolic.svg"));
 
     // Выбор направления приложения силы
     ui->comboBox_directionForce->addItem("по оси x");
@@ -39,6 +41,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Информация о программе и алгоритм расчёта
     connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(slotHelp()));
     connect(ui->actionProgInfo, SIGNAL(triggered()), this, SLOT(slotProgInfo()));
+    ui->actionHelp->setIcon(QIcon(":images/menu_help.svg"));
+    ui->actionProgInfo->setIcon(QIcon(":images/menu_info.svg"));
 
     // Загрузка настроек
     settings_CalcDeflection = new QSettings("settings.conf",QSettings::IniFormat);
@@ -51,12 +55,12 @@ MainWindow::MainWindow(QWidget *parent)
 
 // Вызов окна с информацией о программе
 void MainWindow::slotHelp() {
-    ui->textBrowser->append("Qt "+QVariant(qVersion()).toString());
+    ui->textBrowser->append("CalcDeflection.pdf");
 }
 
 // Вызов pdf файла с алгоритмом расчёта
 void MainWindow::slotProgInfo() {
-    ui->textBrowser->append("CalcDeflection.pdf");
+	ui->textBrowser->append("Qt "+QVariant(qVersion()).toString());
 }
 // Шрифта утолщённый
 void MainWindow::slotFormatTextBold(bool checked) {
@@ -171,8 +175,8 @@ void MainWindow::loadSettings(){
     text.formatTextBold = settings_CalcDeflection->value("settings/font/fontBold").value<bool>();
     text.formatTextItalic = settings_CalcDeflection->value("settings/font/fontItalic").value<bool>();
     ui->actionFormatTextSize->setText("Размер "+QString::number(text.formatTextSize));
-    ui->actioтFormatTextBold->setChecked(text.formatTextBold);
-    ui->actioтFormatTextItalic->setChecked(text.formatTextItalic);
+    ui->actionFormatTextBold->setChecked(text.formatTextBold);
+    ui->actionFormatTextItalic->setChecked(text.formatTextItalic);
     setFormatText();
 
     // Параметры образца
@@ -180,7 +184,7 @@ void MainWindow::loadSettings(){
     ui->doubleSpinBox_L_s->setValue(settings_CalcDeflection->value("settings/L_s").value<double>()); // длина рабочей части [мм]
     ui->doubleSpinBox_H_s->setValue(settings_CalcDeflection->value("settings/H_s").value<double>()); // ширина образца [мм]
     ui->doubleSpinBox_b_s->setValue(settings_CalcDeflection->value("settings/b_s").value<double>()); // толщина образца [мм]
-    ui->doubleSpinBox_h_s->setValue(settings_CalcDeflection->value("settings/h_s").value<double>()); // ширина рабочей части [мм]
+    ui->doubleSpinBox_h_s->setValue(settings_CalcDeflection->value("settings/hs").value<double>()); // ширина рабочей части [мм]
     ui->doubleSpinBox_E1->setValue(settings_CalcDeflection->value("settings/E1").value<double>()); // модуль Юнга образца [ГПа]
 
     // Параметры поводка
@@ -221,7 +225,7 @@ void MainWindow::saveSettings(){
     settings_CalcDeflection->setValue("settings/L_s", ui->doubleSpinBox_L_s->value()); // длина рабочей части [мм]
     settings_CalcDeflection->setValue("settings/H_s", ui->doubleSpinBox_H_s->value()); // ширина образца [мм]
     settings_CalcDeflection->setValue("settings/b_s", ui->doubleSpinBox_b_s->value()); // толщина образца [мм]
-    settings_CalcDeflection->setValue("settings/h_s", ui->doubleSpinBox_h_s->value()); // ширина рабочей части [мм]
+    settings_CalcDeflection->setValue("settings/hs", ui->doubleSpinBox_h_s->value()); // ширина рабочей части [мм]
     settings_CalcDeflection->setValue("settings/E1", ui->doubleSpinBox_E1->value()); // модуль Юнга образца [ГПа]
 
     // Параметры поводка

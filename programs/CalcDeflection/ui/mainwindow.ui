@@ -553,8 +553,8 @@
       <string>Шрифт</string>
      </property>
      <addaction name="actionFormatTextSize"/>
-     <addaction name="actioтFormatTextBold"/>
-     <addaction name="actioтFormatTextItalic"/>
+     <addaction name="actionFormatTextBold"/>
+     <addaction name="actionFormatTextItalic"/>
     </widget>
     <addaction name="menu_3"/>
    </widget>
@@ -571,7 +571,7 @@
   </widget>
   <action name="actionHelp">
    <property name="icon">
-    <iconset theme="help-browser">
+    <iconset>
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
@@ -580,31 +580,31 @@
   </action>
   <action name="actionProgInfo">
    <property name="icon">
-    <iconset theme="help-about">
+    <iconset>
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>О программе</string>
    </property>
   </action>
-  <action name="actioтFormatTextBold">
+  <action name="actionFormatTextBold">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="format-text-bold">
+    <iconset>
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">
     <string>Жирный</string>
    </property>
   </action>
-  <action name="actioтFormatTextItalic">
+  <action name="actionFormatTextItalic">
    <property name="checkable">
     <bool>true</bool>
    </property>
    <property name="icon">
-    <iconset theme="format-text-italic">
+    <iconset>
      <normaloff>.</normaloff>.</iconset>
    </property>
    <property name="text">

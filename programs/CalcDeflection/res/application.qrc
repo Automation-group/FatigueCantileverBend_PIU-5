@@ -1,6 +1,10 @@
 <RCC>
     <qresource prefix="/">
-        <file>images/icon.png</file>
+        <file>images/icon.svg</file>
         <file>images/drawingSampleAndLever.png</file>
+        <file>images/menu_info.svg</file>
+        <file>images/menu_help.svg</file>
+        <file>images/format-text-italic-symbolic.svg</file>
+        <file>images/format-text-bold-symbolic.svg</file>
     </qresource>
 </RCC>

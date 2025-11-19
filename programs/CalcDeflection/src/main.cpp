@@ -10,7 +10,7 @@ int main(int argc, char *argv[]) {
 	#endif
 	// OS Linux
 	#if defined(Q_OS_LINUX)
-        app.setWindowIcon(QIcon(":images/icon.png"));
+        app.setWindowIcon(QIcon(":images/icon.svg"));
     #endif
 	
     MainWindow mainw;
