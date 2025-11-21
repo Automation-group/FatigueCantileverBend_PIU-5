@@ -13,10 +13,6 @@ MainWindow::MainWindow(QWidget *parent)
 {
     ui->setupUi(this);
     this->setWindowTitle("CalcDeflection");
-    // Загрузка иконок для кнопок и прочих изображений
-    QPixmap pixItem;
-    pixItem.load(":/images/drawingSampleAndLever.png");
-    ui->label_plan->setPixmap(pixItem);
 
     // Инициализация сигналов и слотов
     // Настройка шрифта
@@ -27,6 +23,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->actionFormatTextItalic->setIcon(QIcon(":images/format-text-italic-symbolic.svg"));
 
     // Выбор направления приложения силы
+    connect(ui->comboBox_directionForce, SIGNAL(activated(int)), this, SLOT(slotDirectionForce(int)));
     ui->comboBox_directionForce->addItem("по оси x");
     ui->comboBox_directionForce->addItem("по оси y");
     // Выбор сечения поводка
@@ -95,7 +92,6 @@ void MainWindow::setFormatText() {
     this->setFont(mainFont);
 }
 
-
 // Задать шаг интегрирования
 void MainWindow::slotIntegStepChecked(bool checked) {
     if(checked) {
@@ -126,6 +122,41 @@ void MainWindow::slotCalibCoeffChecked(bool checked) {
         ui->label_coeff_b->setEnabled(false);
 		ui->label_coeff_b->setVisible(false);
     }
+}
+
+// Выбор чертежа в зависимости от
+// направления приложения силы и формы сечения поводка
+void MainWindow::setDrawing() {
+    int direction_force = ui->comboBox_directionForce->currentIndex();
+    int leash_section = ui->comboBox_selectType_p->currentIndex();
+    QString nameDrawing = "";
+    if (!direction_force) {
+        if (!leash_section) nameDrawing = ":/drawing/sampleRadiusWorkingPart_rectangularLeash_force_X-axis.svg";
+        else nameDrawing = ":/drawing/sampleRadiusWorkingPart_circularLeash_force_X-axis.svg";
+    } else {
+        if (!leash_section) nameDrawing = ":/drawing/sampleRadiusWorkingPart_rectangularLeash_force_Y-axis.svg";
+        else nameDrawing = ":/drawing/sampleRadiusWorkingPart_circularLeash_force_Y-axis.svg";
+    }
+    // Загрузка чертежа
+    QPixmap pixItem;
+    pixItem.load(nameDrawing);
+    ui->label_plan->setPixmap(pixItem);
+}
+
+// Выбор направления приложения силы
+void MainWindow::slotDirectionForce(int index) {
+    QPixmap pixItem;
+    if(!index) {
+        // Чертёжи для силы приложенной по оси x
+        pixItem.load(":/images/drawingSampleAndLever.png");
+        ui->label_plan->setPixmap(pixItem);
+    }
+    else {
+        // Чертёжи для силы приложенной по оси y
+        pixItem.load(":/images/drawingSampleAndLever.png");
+        ui->label_plan->setPixmap(pixItem);
+    }
+    setDrawing();
 }
 
 // Выбор прямоугольного или круглого сечения поводка
@@ -164,6 +195,7 @@ void MainWindow::slotSelectType_p(int index){
         ui->label_b_p->setVisible(false);
         ui->label_b_p_mm->setVisible(false);
     }
+    setDrawing();
 }
 
 void MainWindow::loadSettings(){
@@ -209,6 +241,9 @@ void MainWindow::loadSettings(){
     slotIntegStepChecked(settings_CalcDeflection->value("settings/cb_integStep").value<bool>());
 	ui->spinBox_integStep->setValue(settings_CalcDeflection->value("settings/integStep").value<int>()); // шаг интегрирования по умолчанию L/1.0e+6
 	slotCalibCoeffChecked(settings_CalcDeflection->value("settings/cb_calibCoeff").value<bool>());
+
+    // Выбор чертежа подвизной системы
+    setDrawing();
 }
 
 void MainWindow::saveSettings(){

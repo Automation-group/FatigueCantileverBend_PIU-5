@@ -23,20 +23,22 @@ private:
 
     unsigned int calcResultId = 0;
     QSettings *settings_CalcDeflection; // настройки программы
-    void saveSettings();
-    void loadSettings();
-    void setFormatText();
+    void saveSettings(); // сохранить настройки
+    void loadSettings(); // загрузить настройки
+    void setFormatText(); // задать формат текста
     // Формат шрифта по умолчанию
     struct defaultTextFormat{
         int formatTextSize = 9;
         bool formatTextBold = false;
         bool formatTextItalic = false;
     } text;
+    void setDrawing(); // выбрать чертёж подвижной системы
 
 protected:
     void closeEvent(QCloseEvent *close);
 
 protected slots:
+    void slotDirectionForce(int index); // выбор направления силы
     void slotSelectType_p(int index); // выбор типа поводка
     void slotCalibCoeffChecked(bool checked); // задать коэффициенты калибровки
     void slotIntegStepChecked(bool checked); // задать шаг интегрирования
