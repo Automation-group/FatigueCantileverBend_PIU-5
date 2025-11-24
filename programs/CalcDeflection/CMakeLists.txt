@@ -9,20 +9,18 @@ set(CMAKE_AUTORCC ON)
 set(CMAKE_CXX_STANDARD 17)
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 
-find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS Widgets QCore Svg)
+find_package(QT NAMES Qt6 Qt5 REQUIRED COMPONENTS QCore Widgets Svg)
 find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Widgets)
+find_package(Qt${QT_VERSION_MAJOR} REQUIRED COMPONENTS Svg)
 message(STATUS "Found Qt: " Qt${QT_VERSION_MAJOR})
 
 set(PROJECT_SOURCES
     src/main.cpp
     src/mainwindow.cpp
     src/mainwindow.h
-    #src/infoDialog.cpp
-    #src/infoDialog.h
 )
 set(PROJECT_UI
     ui/mainwindow.ui
-    #ui/infoWindow.ui
 )
 set(RESOURCE_FILES
     res/application.qrc
@@ -31,8 +29,7 @@ set(RESOURCE_FILES
 
 # Assembly differeces for Qt5 and Qt6
 if(Qt6_FOUND)
-    qt_add_executable(${PROJECT_NAME} MANUAL_FINALIZATION ${PROJECT_SOURCES} ${PROJECT_UI} ${RESOURCE_FILES}
-        ui/infoWindow.ui)
+    qt_add_executable(${PROJECT_NAME} MANUAL_FINALIZATION ${PROJECT_SOURCES} ${PROJECT_UI} ${RESOURCE_FILES})
 endif()
 if(Qt5_FOUND)
     add_executable(${PROJECT_NAME} WIN32 ${PROJECT_SOURCES} ${PROJECT_UI} ${RESOURCE_FILES})
@@ -69,7 +66,7 @@ endif()
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=broadwell -O3") # Intel Core i7-6900K
 #set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -march=bdver1 -O3") # AMD FX-8150
 set_target_properties(${PROJECT_NAME} PROPERTIES WIN32_EXECUTABLE TRUE)
-target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets)
+target_link_libraries(${PROJECT_NAME} PRIVATE Qt${QT_VERSION_MAJOR}::Widgets Qt${QT_VERSION_MAJOR}::Svg)
 
 include(GNUInstallDirs)
 install(TARGETS ${PROJECT_NAME}

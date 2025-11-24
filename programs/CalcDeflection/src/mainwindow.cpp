@@ -1,6 +1,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <QInputDialog>
+#include <QtSvg>
 #include <cmath>
 #include <chrono>
 
@@ -19,9 +20,9 @@ MainWindow::MainWindow(QWidget *parent)
     connect(ui->actionFormatTextSize, SIGNAL(triggered()), this, SLOT(slotFormatTextSize()));
     connect(ui->actionFormatTextBold, SIGNAL(toggled(bool)), this, SLOT(slotFormatTextBold(bool)));
     connect(ui->actionFormatTextItalic, SIGNAL(toggled(bool)), this, SLOT(slotFormatTextItalic(bool)));
-    ui->actionFormatTextBold->setIcon(QIcon(":images/format-text-bold-symbolic.svg"));
-    ui->actionFormatTextItalic->setIcon(QIcon(":images/format-text-italic-symbolic.svg"));
-
+    ui->actionFormatTextBold->setIcon(SvgConvPixmap(":images/format-text-bold-symbolic.svg", 256, 256));
+    ui->actionFormatTextItalic->setIcon(SvgConvPixmap(":images/format-text-italic-symbolic.svg", 256, 256));
+	
     // Выбор направления приложения силы
     connect(ui->comboBox_directionForce, SIGNAL(activated(int)), this, SLOT(slotDirectionForce(int)));
     ui->comboBox_directionForce->addItem("по оси x");
@@ -38,8 +39,8 @@ MainWindow::MainWindow(QWidget *parent)
     // Информация о программе и алгоритм расчёта
     connect(ui->actionHelp, SIGNAL(triggered()), this, SLOT(slotHelp()));
     connect(ui->actionProgInfo, SIGNAL(triggered()), this, SLOT(slotProgInfo()));
-    ui->actionHelp->setIcon(QIcon(":images/menu_help.svg"));
-    ui->actionProgInfo->setIcon(QIcon(":images/menu_info.svg"));
+    ui->actionHelp->setIcon(SvgConvPixmap(":images/menu_help.svg", 256, 256));
+    ui->actionProgInfo->setIcon(SvgConvPixmap(":images/menu_info.svg", 256, 256));
 
     // Загрузка настроек
     settings_CalcDeflection = new QSettings("settings.conf",QSettings::IniFormat);
@@ -138,9 +139,19 @@ void MainWindow::setDrawing() {
         else nameDrawing = ":/drawing/sampleRadiusWorkingPart_circularLeash_force_Y-axis.svg";
     }
     // Загрузка чертежа
-    QPixmap pixItem;
-    pixItem.load(nameDrawing);
-    ui->label_plan->setPixmap(pixItem);
+    ui->label_plan->setPixmap(SvgConvPixmap(nameDrawing, 400, 555));
+}
+
+// Конвертор svg в QPixmap
+QPixmap MainWindow::SvgConvPixmap(QString name, int size_x, int size_y) {
+	QPixmap pixImage(size_x, size_y);
+	pixImage.fill(Qt::transparent); // прозрачный фон
+	
+	// Конвертирование
+	QSvgRenderer renderer(name);
+	QPainter painter(&pixImage);
+	renderer.render(&painter);
+    return pixImage;
 }
 
 // Выбор направления приложения силы

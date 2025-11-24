@@ -33,7 +33,9 @@ private:
         bool formatTextItalic = false;
     } text;
     void setDrawing(); // выбрать чертёж подвижной системы
-
+	
+	QPixmap SvgConvPixmap(QString name, int size_x, int size_y); // конвертор svg в QPixmap
+	
 protected:
     void closeEvent(QCloseEvent *close);
 
