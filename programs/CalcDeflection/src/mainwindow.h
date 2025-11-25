@@ -18,6 +18,8 @@ public:
     MainWindow(QWidget *parent = nullptr);
     ~MainWindow();
 
+    QPixmap SvgConvPixmap(QString name, int size_x, int size_y); // конвертор svg в QPixmap
+
 private:
     Ui::MainWindow *ui;
 
@@ -33,8 +35,6 @@ private:
         bool formatTextItalic = false;
     } text;
     void setDrawing(); // выбрать чертёж подвижной системы
-	
-	QPixmap SvgConvPixmap(QString name, int size_x, int size_y); // конвертор svg в QPixmap
 	
 protected:
     void closeEvent(QCloseEvent *close);

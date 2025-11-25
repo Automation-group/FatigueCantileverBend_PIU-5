@@ -6,6 +6,7 @@
 #include <chrono>
 
 #include "mainwindow.h"
+#include "infoDialog.h"
 #include "../ui/ui_mainwindow.h"
 
 MainWindow::MainWindow(QWidget *parent)
@@ -58,7 +59,8 @@ void MainWindow::slotHelp() {
 
 // Вызов pdf файла с алгоритмом расчёта
 void MainWindow::slotProgInfo() {
-	ui->textBrowser->append("Qt "+QVariant(qVersion()).toString());
+    Dialog dialog;
+    dialog.exec();
 }
 // Шрифта утолщённый
 void MainWindow::slotFormatTextBold(bool checked) {

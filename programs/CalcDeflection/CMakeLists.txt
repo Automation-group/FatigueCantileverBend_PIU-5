@@ -18,9 +18,12 @@ set(PROJECT_SOURCES
     src/main.cpp
     src/mainwindow.cpp
     src/mainwindow.h
+    src/infoDialog.cpp
+    src/infoDialog.h
 )
 set(PROJECT_UI
     ui/mainwindow.ui
+    ui/infoWindow.ui
 )
 set(RESOURCE_FILES
     res/application.qrc
