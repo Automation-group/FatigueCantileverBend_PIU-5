@@ -6,58 +6,43 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>416</width>
-    <height>305</height>
+    <width>520</width>
+    <height>370</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Dialog</string>
   </property>
   <layout class="QGridLayout" name="gridLayout">
-   <item row="0" column="0" rowspan="10">
-    <widget class="QLabel" name="label_image">
-     <property name="text">
-      <string/>
-     </property>
-    </widget>
-   </item>
-   <item row="1" column="1" colspan="2">
+   <item row="0" column="2">
     <widget class="QLabel" name="label_version">
-     <property name="font">
-      <font>
-       <bold>true</bold>
-      </font>
-     </property>
      <property name="text">
       <string>CalcDeflection_version</string>
      </property>
     </widget>
    </item>
-   <item row="8" column="1" colspan="2">
-    <widget class="QLabel" name="label_data_company">
-     <property name="font">
-      <font>
-       <bold>true</bold>
-      </font>
+   <item row="2" column="2">
+    <widget class="QLabel" name="label_autors">
+     <property name="text">
+      <string>Autors:</string>
      </property>
+    </widget>
+   </item>
+   <item row="5" column="2">
+    <widget class="QLabel" name="label_data_company">
      <property name="text">
       <string>data_company</string>
      </property>
     </widget>
    </item>
-   <item row="9" column="1" colspan="2">
+   <item row="6" column="2">
     <widget class="QLabel" name="label_qtversion">
-     <property name="font">
-      <font>
-       <bold>true</bold>
-      </font>
-     </property>
      <property name="text">
       <string>Qt_version</string>
      </property>
     </widget>
    </item>
-   <item row="10" column="0">
+   <item row="7" column="0">
     <spacer name="horizontalSpacer">
      <property name="orientation">
       <enum>Qt::Horizontal</enum>
@@ -70,27 +55,24 @@
      </property>
     </spacer>
    </item>
-   <item row="10" column="1" colspan="2">
+   <item row="7" column="2">
     <widget class="QPushButton" name="pushButton_close">
      <property name="text">
       <string>Закрыть</string>
      </property>
     </widget>
    </item>
-   <item row="7" column="1" colspan="2">
-    <spacer name="verticalSpacer">
-     <property name="orientation">
-      <enum>Qt::Vertical</enum>
-     </property>
-     <property name="sizeHint" stdset="0">
-      <size>
-       <width>133</width>
-       <height>38</height>
-      </size>
-     </property>
-    </spacer>
+   <item row="3" column="2" rowspan="2">
+    <widget class="QTextBrowser" name="textBrowser_autors"/>
    </item>
-   <item row="2" column="1" colspan="2">
+   <item row="0" column="0" rowspan="7">
+    <widget class="QLabel" name="label_image">
+     <property name="text">
+      <string/>
+     </property>
+    </widget>
+   </item>
+   <item row="1" column="1" colspan="2">
     <spacer name="verticalSpacer_2">
      <property name="orientation">
       <enum>Qt::Vertical</enum>
@@ -102,45 +84,6 @@
       </size>
      </property>
     </spacer>
-   </item>
-   <item row="3" column="1" colspan="2">
-    <widget class="QLabel" name="label_autors">
-     <property name="font">
-      <font>
-       <italic>false</italic>
-       <bold>true</bold>
-      </font>
-     </property>
-     <property name="text">
-      <string>Autors:</string>
-     </property>
-    </widget>
-   </item>
-   <item row="4" column="1" colspan="2">
-    <widget class="QLabel" name="label_autor_1">
-     <property name="text">
-      <string>autor_1</string>
-     </property>
-    </widget>
-   </item>
-   <item row="5" column="1" colspan="2">
-    <widget class="QLabel" name="label_autor_2">
-     <property name="font">
-      <font>
-       <kerning>true</kerning>
-      </font>
-     </property>
-     <property name="text">
-      <string>autor_2</string>
-     </property>
-    </widget>
-   </item>
-   <item row="6" column="1" colspan="2">
-    <widget class="QLabel" name="label_autor_3">
-     <property name="text">
-      <string>autor_3</string>
-     </property>
-    </widget>
    </item>
   </layout>
  </widget>

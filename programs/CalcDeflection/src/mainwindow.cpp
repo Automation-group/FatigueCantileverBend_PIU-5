@@ -49,15 +49,14 @@ MainWindow::MainWindow(QWidget *parent)
 	
 	// Глобальные настройка шрифта
 	//this->setFont(QFont("Arial", 10, QFont::Bold, true));
-    //setStyleSheet(QString("* { font: %1pp ''; }").arg(formatTextSize));
+}
+
+// Вызов pdf файла с алгоритмом расчёта прогиба
+void MainWindow::slotHelp() {
+    QDesktopServices::openUrl(QUrl::fromLocalFile(qApp->applicationDirPath() + "/doc/CalcDeflection_doc.pdf"));
 }
 
 // Вызов окна с информацией о программе
-void MainWindow::slotHelp() {
-    ui->textBrowser->append("CalcDeflection.pdf");
-}
-
-// Вызов pdf файла с алгоритмом расчёта
 void MainWindow::slotProgInfo() {
     Dialog dialog;
     dialog.exec();
@@ -310,12 +309,18 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     double L_s = ui->doubleSpinBox_L_s->value()/1000.0; // длина рабочей части [м]
     double H_s = ui->doubleSpinBox_H_s->value()/1000.0; // ширина образца [м]
     double b_s = ui->doubleSpinBox_b_s->value()/1000.0; // толщина образца [м]
-    double h_s = ui->doubleSpinBox_h_s->value()/1000.0; // ширина рабочей части [м]
+    double hs = ui->doubleSpinBox_h_s->value()/1000.0; // ширина рабочей части [м]
     double E_1 = ui->doubleSpinBox_E1->value()*1.0e+9; // модуль Юнга образца [Па]
 
-    double R_s = (L_s*L_s+(H_s-h_s)*(H_s-h_s))/(4.0*(H_s-h_s)); // радиус образца [м]
+    // Обработка ошибок ввода данных
+    if(H_s-hs <= 0) {
+        ui->textBrowser->append("Ошибка H_s < h_s");
+        return;
+    }
+
+    double R_s = (L_s*L_s+(H_s-hs)*(H_s-hs))/(4.0*(H_s-hs)); // радиус образца [м]
     double z_0 = L_s/2.0; // расстояние от центра радиуса до 0 по оси z [м]
-    double y_0 = R_s + h_s/2.0; // расстояние от центра радиуса до 0 по оси y [м]
+    double y_0 = R_s + hs/2.0; // расстояние от центра радиуса до 0 по оси y [м]
 
     // Параметры поводка
     double L_p = ui->doubleSpinBox_L_p->value()/1000.0;  // длина поводка [м]
@@ -323,11 +328,11 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     double b_p = ui->doubleSpinBox_b_p->value()/1000.0; // высота прямоугольного поводка [м]
     double D_p = ui->doubleSpinBox_D_p->value()/1000.0; // диаметр круглого поводка [м]
     double E_2 = ui->doubleSpinBox_E2->value()*1.0e+9; // модуль Юнга поводка из титана [Па]
-    double P = 1.0; // сила приложенная к концу поводка [H] (используется в расчёте и измерять её не нужно)
-    double L = L_s + L_p; // суммарная длина поводка и образца [м]
+    double P_force = 1.0; // сила приложенная к концу поводка [H] (используется в расчёте и измерять её не нужно)
+    double L_sp = L_s + L_p; // суммарная длина поводка и образца [м]
 
     // Параметры интегрирования
-    double dz = L/pow(10.0,ui->spinBox_integStep->value()); // шаг интегрирования (по умолчанию L/1.0e+6)
+    double dz = L_sp/pow(10.0,ui->spinBox_integStep->value()); // шаг интегрирования (по умолчанию L/1.0e+6)
     double W_fi = 0.0; // промежуточный результат интегрирования
     double W_tau = 0.0; // максимальное отклонение [м]
     double Wzmax = 0.0; // максимальное напряжение на поверхности рабочей части образца при приложении силы P [м]
@@ -341,21 +346,21 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     if (!direction_force) I1_z_const = 2.0*b_s*b_s*b_s/3.0; // смещение перпендикулярно ширине образца
     else I1_z_const = 2.0*b_s/3.0; // смещение перпендикулярно радиусу образца
     double R_square = R_s*R_s;
-    double P_E2_I2z_const = P/(E_2*I2_z);
+    double P_E2_I2z_const = P_force/(E_2*I2_z);
     double z = 0.0;
-    while (z < L+dz) {
+    while (z < L_sp+dz) {
         if (z < L_s) {
             double y = y_0-sqrt(R_square-(z-z_0)*(z-z_0));
             double I1_z = 0.0;
             if (!direction_force) I1_z = I1_z_const*y; // сила направлена по оси х
             else I1_z = I1_z_const*y*y*y; // сила направлена по оси y
-            double Wz = y*P*(L-z)/(I1_z*1.0e+6);
+            double Wz = y*P_force*(L_sp-z)/(I1_z*1.0e+6);
             if (Wz > Wzmax) Wzmax = Wz;
 
-            W_fi += dz*P*(L-z)/(E_1*I1_z);
+            W_fi += dz*P_force*(L_sp-z)/(E_1*I1_z);
             W_tau += W_fi*dz;
         } else {
-            W_fi += dz*P_E2_I2z_const*(L-z);
+            W_fi += dz*P_E2_I2z_const*(L_sp-z);
             W_tau += W_fi*dz;
         }
         z += dz;
@@ -370,7 +375,7 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     ui->textBrowser->append("Длина рабочей части L_s = "+QString::number(L_s*1000.0)+" мм," );
     ui->textBrowser->append("Ширина образца H_s = "+QString::number(H_s*1000.0)+" мм," );
     ui->textBrowser->append("Толщина образца b_s = "+QString::number(b_s*1000.0)+" мм," );
-    ui->textBrowser->append("Ширина рабочей части h_s = "+QString::number(h_s*1000.0)+" мм," );
+    ui->textBrowser->append("Ширина рабочей части h_s = "+QString::number(hs*1000.0)+" мм," );
     ui->textBrowser->append("Модуль Юнга образца E1 = "+QString::number(E_1/1.0e+9)+" ГПа\n" );
 
     // Размеры и модуль Юнга поводка
@@ -391,11 +396,11 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
         ui->textBrowser->append("Чувствительность = "+QString::number(sens)+" ед.ацп/мкм," );
     }
     if(ui->checkBox_force1N->isChecked()){
-        ui->textBrowser->append("v max = "+QString::number(W_tau*1000.0)+" мм при приложении силы P = "+QString::number(P)+" Н,");
-        ui->textBrowser->append("σ max = "+QString::number(Wzmax)+" МПа при приложении силы P = "+QString::number(P)+" Н,");
+        ui->textBrowser->append("v max = "+QString::number(W_tau*1000.0)+" мм при приложении силы P = "+QString::number(P_force)+" Н,");
+        ui->textBrowser->append("σ max = "+QString::number(Wzmax)+" МПа при приложении силы P = "+QString::number(P_force)+" Н,");
     }
     ui->textBrowser->append("Прогиб v при "+QString::number(stress/1e+6)+" МПа равен "+QString::number(deflection*1000)+" мм,");
-    ui->textBrowser->append("Сила на конце поводка при прогибе v равна "+QString::number(P*stress/(Wzmax*1e+6))+ " Н");
+    ui->textBrowser->append("Сила на конце поводка при прогибе v равна "+QString::number(P_force*stress/(Wzmax*1e+6))+ " Н");
 
     // Время окончания отсчёта
     auto finish_time_us = std::chrono::high_resolution_clock::now()-start_time_us;

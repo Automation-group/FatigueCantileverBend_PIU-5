@@ -7,6 +7,9 @@ Dialog::Dialog() {
   // Название окна
   this->setWindowTitle("О программе");
 
+  // Зафиксировать размер окна
+  this->setFixedSize(530, 370);
+
   // Иконка окна
   // OS Windows
   #if defined(Q_OS_WIN)
@@ -22,25 +25,26 @@ Dialog::Dialog() {
   ui.label_image->setPixmap(pixconv.SvgConvPixmap(":images/iconLogo.svg", 256, 256));
 
   // Информация о версии программы
-  ui.label_version->setText("CalcDeflection 0.2");
+  ui.label_version->setText(QString("<strong>%1</strong>").arg("CalcDeflection 0.2"));
   ui.label_version->setAlignment(Qt::AlignCenter);
 
   // Информация об авторах программы
-  ui.label_autors->setText("Авторы программы:");
+  ui.label_autors->setText(QString("<strong>%1</strong>").arg("Авторы программы"));
   ui.label_autors->setAlignment(Qt::AlignCenter);
-  ui.label_autor_1->setText("Ветров Д.Н.");
-  ui.label_autor_1->setAlignment(Qt::AlignCenter);
-  ui.label_autor_2->setText("Сысоев А.Н.");
-  ui.label_autor_2->setAlignment(Qt::AlignCenter);
-  ui.label_autor_3->setText("Берендеев Н.Н.");
-  ui.label_autor_3->setAlignment(Qt::AlignCenter);
+  ui.textBrowser_autors->append(QString("<strong>%1</strong>").arg("Программирование"));
+  ui.textBrowser_autors->append("Ветров Д.Н.\n");
+  ui.textBrowser_autors->append(QString("<strong>%1</strong>").arg("Разработка алгоритма расчёта"));
+  ui.textBrowser_autors->append("Cысоев А.Н.");
+  ui.textBrowser_autors->append("Берендеев Н.Н.\n");
+  ui.textBrowser_autors->append(QString("<strong>%1</strong>").arg("Изготовление прототипа"));
+  ui.textBrowser_autors->append("Котков Д.Н.");
 
   // Информация об организации
-  ui.label_data_company->setText("НИФТИ ННГУ 2025");
+  ui.label_data_company->setText(QString("<strong>%1</strong>").arg("НИФТИ ННГУ 2025"));
   ui.label_data_company->setAlignment(Qt::AlignCenter);
 
   // Информация о версии Qt
-  ui.label_qtversion->setText("Qt "+QVariant(qVersion()).toString());
+  ui.label_qtversion->setText(QString("<strong>%1</strong>").arg("Qt "+QVariant(qVersion()).toString()));
   ui.label_qtversion->setAlignment(Qt::AlignCenter);
 }
 
