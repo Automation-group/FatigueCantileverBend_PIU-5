@@ -1,6 +1,7 @@
 #include <QtCore>
 #include <QtGui>
 #include <QInputDialog>
+#include <QMessageBox>
 #include <QtSvg>
 #include <cmath>
 #include <chrono>
@@ -51,16 +52,6 @@ MainWindow::MainWindow(QWidget *parent)
 	//this->setFont(QFont("Arial", 10, QFont::Bold, true));
 }
 
-// Вызов pdf файла с алгоритмом расчёта прогиба
-void MainWindow::slotHelp() {
-    QDesktopServices::openUrl(QUrl::fromLocalFile(qApp->applicationDirPath() + "/doc/CalcDeflection_doc.pdf"));
-}
-
-// Вызов окна с информацией о программе
-void MainWindow::slotProgInfo() {
-    Dialog dialog;
-    dialog.exec();
-}
 // Шрифта утолщённый
 void MainWindow::slotFormatTextBold(bool checked) {
     text.formatTextBold = checked;
@@ -412,11 +403,31 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     ui->textBrowser->append("======================================\n");
 }
 
+// Очистить окно вывода с результатами расчёта
 void MainWindow::on_pushButton_clear_clicked(bool checked) {
     ui->textBrowser->clear();
     calcResultId = 0;
 }
 
+// Вызов pdf файла с алгоритмом расчёта прогиба
+void MainWindow::slotHelp() {
+    QString fileName = QString(qApp->applicationDirPath()+"/doc/CalcDeflection_doc.pdf");
+    if(!QFile::exists(fileName)){
+        QMessageBox::information(this, "Предупреждение",
+                                 "Файл CalcDeflection_doc.pdf не найден!",
+                                 QMessageBox::Ok);
+        return;
+    }
+    QDesktopServices::openUrl(QUrl::fromLocalFile(fileName));
+}
+
+// Вызов окна с информацией о программе
+void MainWindow::slotProgInfo() {
+    Dialog dialog;
+    dialog.exec();
+}
+
+// Сохранение настроек при закрытии программы
 void MainWindow::closeEvent(QCloseEvent *close) {
     saveSettings();
 }

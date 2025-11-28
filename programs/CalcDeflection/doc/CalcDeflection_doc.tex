@@ -1,0 +1,60 @@
+\documentclass[a4paper,12pt]{article}
+\usepackage[utf8x]{inputenc}
+\usepackage[english,russian]{babel}
+\usepackage{indentfirst} % табуляция в начале абзаца
+\usepackage{graphicx} % вставка изображений
+\usepackage{wrapfig} % вставки изображений окруженных текстом
+\usepackage{amsmath}
+\usepackage{xcolor} % цвет для макросов
+\usepackage{hyperref} % макросы
+\usepackage{hyphenat} % макрос для сокращения слов
+\usepackage[left=2cm, top=3cm, right=2cm, bottom=2cm]{geometry} % отступы по краям листа
+
+\definecolor{linkcolor}{HTML}{009900} % цвет ссылок (зелёный)
+\definecolor{urlcolor}{HTML}{009900} % цвет гиперссылок
+%\DeclareUnicodeCharacter{00A0}{} % неразрывные пробелы в кодировке UTF-8
+\DeclareUnicodeCharacter{200E}{} % написание с лева на право
+\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, colorlinks=true} % настройка цветов для выделения ссылок
+
+% титульный лист
+\title{Описание алгоритмов расчёта программы CalcDeflection 0.2}
+\author{Ветров Д.Н.}
+\date{\today}
+
+\begin{document}
+
+	% Убираем нумерацию с титульного листа
+	\begin{titlepage}
+		\maketitle % титульный листа
+		\thispagestyle{empty} % убираем нумерацию титульного листа
+	\end{titlepage}
+	\pagenumbering{arabic} % нумерация арабскими цыфрами
+	\newpage
+
+	% содержание
+	\tableofcontents
+
+	% о программе
+	%\include{aboutProg_ru}
+
+	% описание расчёта по формуле Уилера
+	%\include{coilWheeler_ru}
+
+	% расчёт по формуле для замкнутых витков
+	%\include{coilClosTurns_ru}
+
+	% список литературы
+	%\include{references_ru}
+\end{document}
+
+%\section{Раздел}
+%\label{ex:section}
+%\subsection{Подраздел}
+%\label{ex:subsection}
+%\subsubsection[<<Подподраздел>>]{Что-то более мелкое чем подраздел}
+%\label{ex:subsubsection}
+%\paragraph{Параграф}
+%\label{ex:paragraph}
+%\subparagraph{Подпараграф}
+%\label{ex:subparagraph}
+
