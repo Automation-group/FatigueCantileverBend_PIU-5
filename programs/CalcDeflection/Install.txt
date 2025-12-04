@@ -40,6 +40,15 @@ SET PATH=%_ROOT%\qtbase\bin;%_ROOT%\gnuwin64\bin;%PATH%
 cmake -S . -B build/ -G "MinGW Makefiles"
 cmake --build build/ --parallel 8
 
+Сборка документации с помощью LATEX
+
+cd doc/
+# Формат pdf
+pdflatex -output-directory=build -output-format=pdf --shell-escape CalcDeflection_doc.tex
+# Формат dvi
+pdflatex -output-directory=build -output-format=dvi --shell-escape CalcDeflection_doc.tex
+# Формат html
+make4ht -b build CalcDeflection_doc.tex
 
 Примечание
 

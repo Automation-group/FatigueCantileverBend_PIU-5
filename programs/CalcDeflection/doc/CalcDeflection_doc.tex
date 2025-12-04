@@ -1,15 +1,16 @@
 \documentclass[a4paper,12pt]{article}
+\usepackage[T2A,T1]{fontenc}
 \usepackage[utf8x]{inputenc}
 \usepackage[english,russian]{babel}
 \usepackage{indentfirst} % табуляция в начале абзаца
 \usepackage{graphicx} % вставка изображений
 \usepackage{wrapfig} % вставки изображений окруженных текстом
-\usepackage{amsmath}
+\usepackage{amsmath,amssymb} % математические формулы, математические символы
 \usepackage{xcolor} % цвет для макросов
-\usepackage{hyperref} % макросы
 \usepackage{hyphenat} % макрос для сокращения слов
 \usepackage[left=2cm, top=3cm, right=2cm, bottom=2cm]{geometry} % отступы по краям листа
-
+\usepackage{hyperref} % макрос для ссылок
+\usepackage{svg} % чтения формата svg
 \definecolor{linkcolor}{HTML}{009900} % цвет ссылок (зелёный)
 \definecolor{urlcolor}{HTML}{009900} % цвет гиперссылок
 %\DeclareUnicodeCharacter{00A0}{} % неразрывные пробелы в кодировке UTF-8
@@ -18,35 +19,37 @@
 
 % титульный лист
 \title{Описание алгоритмов расчёта программы CalcDeflection 0.2}
-\author{Ветров Д.Н.}
+\author{Ветров Д.Н. Сысоев А.Н.}
 \date{\today}
 
 \begin{document}
 
 	% Убираем нумерацию с титульного листа
+	\pagenumbering{Alph}
 	\begin{titlepage}
 		\maketitle % титульный листа
 		\thispagestyle{empty} % убираем нумерацию титульного листа
 	\end{titlepage}
 	\pagenumbering{arabic} % нумерация арабскими цыфрами
-	\newpage
 
 	% содержание
 	\tableofcontents
+	\newpage
 
 	% о программе
-	%\include{aboutProg_ru}
+	\input{aboutProg}
+	\newpage
 
-	% описание расчёта по формуле Уилера
-	%\include{coilWheeler_ru}
-
-	% расчёт по формуле для замкнутых витков
-	%\include{coilClosTurns_ru}
+	% описание расчёта прогиба
+	\input{algDeflection}
+	\newpage
 
 	% список литературы
-	%\include{references_ru}
+	\input{references}
+
 \end{document}
 
+% Памятка по структуре документа
 %\section{Раздел}
 %\label{ex:section}
 %\subsection{Подраздел}
@@ -57,4 +60,14 @@
 %\label{ex:paragraph}
 %\subparagraph{Подпараграф}
 %\label{ex:subparagraph}
-
+% Варианты префикса ex:
+%ch: 	chapter
+%sec: 	section
+%subsec: 	subsection
+%fig: 	figure
+%tab: 	table
+%eq: 	equation
+%lst: 	code listing
+%itm: 	enumerated list item
+%alg: 	algorithm
+%app: 	appendix subsection

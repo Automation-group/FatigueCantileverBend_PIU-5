@@ -413,7 +413,7 @@ void MainWindow::on_pushButton_clear_clicked(bool checked) {
 void MainWindow::slotHelp() {
     QString fileName = QString(qApp->applicationDirPath()+"/doc/CalcDeflection_doc.pdf");
     if(!QFile::exists(fileName)){
-        QMessageBox::information(this, "Предупреждение",
+        QMessageBox::warning(this, "Предупреждение",
                                  "Файл CalcDeflection_doc.pdf не найден!",
                                  QMessageBox::Ok);
         return;

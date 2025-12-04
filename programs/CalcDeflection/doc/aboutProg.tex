@@ -1,0 +1,40 @@
+% первая глава
+\section{О программе CalcDeflection}
+
+\smallskip %\medskip \bigskip
+Программа CalcDeflection предназначена для расчёта величины прогиба
+образца при заданном механическом напряжении $\sigma$. Результат расчёта
+величины прогиба при заданном $\sigma$ используется при испытаниях материаллов
+на усталось в установках ПИУ-4 и ПИУ-5. В программе можно задать размеры образца,
+выбрать ось по которой будет приложена сила изгибающая образец и форуму
+сечения рычага к которому прикладывается изгибащая сила. Материалы из
+которых изготовлены образец и рычаг задаются установкой модуля Юнга.
+Кроме этого в программе можно вывести время расчёта, шаг интегрирования и
+некоторые другие параметры о которых будет рассказано в следующей главе.
+
+\ Поскольку для написания программы была использован кроссплатформенный фреймворк $Qt$,
+то программа может быть собрана под различные операционные системы. Внешнишний вид
+программы для \mbox{ОС Kubutu 22.04} представлен на Рис.\ref{fig:calcDeflection_linux}, а для
+\mbox{ОС Windows 10} на Рис.\ref{fig:calcDeflection_windows}.
+
+\begin{figure}[h]
+	\begin{center}
+		\hspace*{\fill}
+		\begin{minipage}[ht]{0.4\linewidth}
+			\includegraphics[width=1.0\textwidth]{image/CalcDeflection_screen_linux.png}
+			\caption{\small Внешний вид CalcDeflection v0.2 в Kubuntu 24.04}
+			\label{fig:calcDeflection_linux}
+		\end{minipage}
+		\hfill
+		\begin{minipage}[ht]{0.4\linewidth}
+			\includegraphics[width=1.0\textwidth]{image/CalcDeflection_screen_linux.png}
+			\caption{\small Внешний вид CalcDeflection v0.2 в Windows 10}
+			\label{fig:calcDeflection_windows}
+		\end{minipage}
+		\hspace*{\fill}
+	\end{center}
+\end{figure}
+
+\ Исходный код программы можно взять на сайте
+\href{https://github.com/Automation-group/FatigueCantileverBend_PIU-5/tree/main/programs/CalcDeflection}{github.com‎}.
+Описание по сборке программы из исходников находится по этой же ссылке.
