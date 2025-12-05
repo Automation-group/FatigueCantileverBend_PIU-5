@@ -4,49 +4,128 @@
 \subsection{Дифференциальное уравнение для функции прогиба}
 
 Для расчёта величины прогиба воспользуемся системой дифференциальных
-уравнений из  $\S$  8.2 \cite{1_}. Система дифференциальных уравнений первого порядка для
+уравнений из \cite{1_} $\S$  8.1 и  $\S$  8.2. Система дифференциальных уравнений первого порядка для
 функции прогиба имеет вид
 
 \begin{align}
-	\label{eq:sysEquat_deflection}
+	\label{eq:sysEquat_deflection_full}
   	\begin{cases}
-		\dfrac{d \phi}{dx} &= - \dfrac{M}{E \cdot J} \\[3ex]
-		\dfrac{dW}{dz} &= \phi
+		\dfrac{d \varphi}{dx} &= - \dfrac{M}{E \cdot J} \\[3ex]
+		\dfrac{d \nu}{dz} &= \tg \, \varphi
   	\end{cases}
 \end{align}
 
-\begin{wrapfigure}{2}{200pt}
-    \includesvg[width=2.3in]{image/sampleRadiusWorkingPart_rectangularLeash_force_X-axis.svg}
-    \caption {Образец с поводком прямоугольного сечения и силой приложенной по оси $x$}
-    \label{fig:rectangularLeash_force_X-axis}
-\end{wrapfigure}
-
 \begin{flushleft}
-	$\phi$ - угол прогиба в градусах,\newline
-	$W$ - величина прогиба в метрах,\newline
+	$\varphi$ - угол прогиба в радианах,\newline
+	$\nu$ - величина прогиба в метрах,\newline
 	$M$ - изгибающий момент в Нм,\newline
 	$E$ - модуль Юнга в Па,\newline
 	$J$ - момент инерции сечения в кг$\cdot$м$^2$\newline
 \end{flushleft}
 
-Из ситемы уравнений (\ref{eq:sysEquat_deflection}) выразим величину прогиба $W$
+Посколюку угол $\varphi$ выражен в радианах, то при малых углах прогиба,
+менее 0.5 радиан, \mbox{$\tg \, \varphi \approx \varphi$} и поэтому имеем простую
+зависиммость между функцией углов поворота сечений и функцией прогибов
+
+\begin{align}
+	\label{eq:sysEquat_deflection}
+  	\begin{cases}
+		\dfrac{d \varphi}{dx} &= - \dfrac{M}{E \cdot J} \\[3ex]
+		\dfrac{d \nu}{dz} &= \varphi
+  	\end{cases}
+\end{align}
+
+Из ситемы уравнений \eqref{eq:sysEquat_deflection} выразим величину прогиба $\nu$
 
 \begin{align}
 	\label{eq:iint_deflection}
-  	W &=  \int\limits_{0}^{L} \int\limits_{0}^{z'}  \frac{M(z)}{E(z) \cdot J(z)} \,dz \,dz
+  	\nu &=  \int\limits_{0}^{L} \int\limits_{0}^{z'}  \frac{M(z)}{E(z) \cdot J(z)} \,dz \,dz
 \end{align}
 
-В формуле (\ref{eq:iint_deflection}) рассчитывается значение модуля прогиба,
-то есть знак "$-$" \ опущен. Кроме этого в подинтегральном выражении
-значения изгибающего момента $M(z)$,
+По формуле (\ref{eq:iint_deflection}) рассчитывается значение модуля прогиба,
+то есть знак "$-$" \ опущен. Переменная $L$ это суммарную длину
+рабочей части образца и рычага в метрах \eqref{eq:L_Lp_Ls}. Кроме этого
+в подинтегральном выражении значения изгибающего момента $M(z)$,
 момента инерции сечения $J(z)$ и величина модуля Юнга $E(z)$ зависят от
 координаты $z$, а $J(z)$ ещё зависит от формы образца с рычагом и
-направления приложения силы. То есть возникает четыре основных варианта
-для вычисления величины прогиба $W$ - в зависимости от формы сечения рычага
+направления приложения силы. То есть возникает несколько вариантов
+для вычисления величины прогиба $\nu$ в зависимости от формы сечения рычага -
 круглой или прямоугольной и направления приложения силы - по оси $x$
 или по оси $y$. Рассмотрим эти варианты подробнее.
 
-Сначала рассмотрим вариант представленный на Рис.\ref{fig:rectangularLeash_force_X-axis}
-с рычагом прямоугольного сечения и силой приложенной по оси $x$.
-% \newpage
+Сначала рассмотрим образец прикреплённый к рычагу прямоугольного сечения.
+На Рис.\ref{fig:rectangularLeash} представлены два чертежа с приложенной
+к рычагу силой $\vec{P}$ по \mbox{оси $x$} и по \mbox{оси $y$}.
 
+\newpage
+\begin{figure}[h]
+	\begin{center}
+		\hspace*{\fill}
+		\begin{subfigure}{0.4\textwidth}
+			\includesvg[width=\textwidth]{image/sampleRadiusWorkingPart_rectangularLeash_force_X-axis.svg}
+			\caption {Сила приложена по оси $x$}
+			\label{fig:rectangularLeash_force_X-axis}
+		\end{subfigure}
+		\hfill
+		\begin{subfigure}{0.4\textwidth}
+			\includesvg[width=\textwidth]{image/sampleRadiusWorkingPart_rectangularLeash_force_Y-axis.svg}
+			\caption {Сила приложена по оси $y$}
+			\label{fig:rectangularLeash_force_Y-axis}
+		\end{subfigure}
+		\hspace*{\fill}
+		\caption {Образец с поводком прямоугольного сечения и силой приложенной по оси $y$}
+		\label{fig:rectangularLeash}
+	\end{center}
+\end{figure}
+
+Распишем подробнее переменные $M(z)$, $E(z)$ и $J(z)$ из подинтегральное выражение
+формулы \eqref{eq:iint_deflection} для образца прикреплённого к рычагу
+прямоугольного сечения с приложением силы по оси $x$, как показанано на
+Рис. \ref{fig:rectangularLeash_force_X-axis}.
+
+\begin{align}
+	\label{eq:Mz_rect_x-axis}
+	&M(z) = P(L-z) \\
+	\label{eq:Ez_rect_x-axis}
+	&E(z) =
+	\begin{cases}
+		\text{Модуль Юнга материала образца,} &\text{если }\ 0 \leqslant z < L \_ s \\
+		\text{Модуль Юнга материала рычага,} &\text{если }\ L \_ s \leqslant z \leqslant L
+	\end{cases}
+	\\
+	\label{eq:Jz_rect_x-axis}
+	&J(z) =
+	\begin{cases}
+		\dfrac{2}{3} \cdot b \_ s^3 \cdot y(z) \text{,} &\text{если }\ 0 \leqslant z < L \_ s \\[3ex]
+		\dfrac{b \_ p^3 \cdot a \_ p}{12} \text{,} &\text{если }\ L \_ s \leqslant z \leqslant L
+	\end{cases}
+\end{align}
+
+Величина $L$ это суммарная длина рабочей части образца и рычага
+
+\begin{align}
+	\label{eq:L_Lp_Ls}
+	L = L \_s + L \_ p
+\end{align}
+
+Зависимость $y(z)$ определяется геометрией образца и рассчитывается из системы уравнений
+
+\begin{align}
+	\label{eq:yz_R_s_y_0_z_0}
+	\begin{cases}
+		y(z) &= y_0 - \sqrt{R_s^2-(z - z_0)^2} \\[2ex]
+		y_0 &= R_s + \dfrac{h \_ s}{2} \\[2ex]
+		z_0 &= \dfrac{L \_ s}{2} \\[2ex]
+		R_s &= \dfrac{L \_ s^2 +(H \_ s - h \_ s)^2}{4 \cdot (H \_ s - h \_ s)}
+	\end{cases}
+\end{align}
+
+В системе уравнений \eqref{eq:yz_R_s_y_0_z_0} $y_0$ и $z_0$ это координаты
+центра радиуса скругления образца, а $R_s$ это радиус скругления. Изображение образца
+с указанием начала координат и центром скругления показано на Рис. .
+
+%\begin{wrapfigure}{2}{200pt}
+%    \includesvg[width=2.3in]{image/sampleRadiusWorkingPart_rectangularLeash_force_X-axis.svg}
+%    \caption {Образец с поводком прямоугольного сечения и силой приложенной по оси $x$}
+%    \label{fig:rectangularLeash_force_X-axis}
+%\end{wrapfigure}
