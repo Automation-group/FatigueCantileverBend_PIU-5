@@ -10,7 +10,7 @@
 \begin{align}
 	\label{eq:sysEquat_deflection_full}
   	\begin{cases}
-		\dfrac{d \varphi}{dx} &= - \dfrac{M}{E \cdot J} \\[3ex]
+		\dfrac{d \varphi}{dz} &= - \dfrac{M}{E \cdot J} \\[3ex]
 		\dfrac{d \nu}{dz} &= \tg \, \varphi
   	\end{cases}
 \end{align}
@@ -30,20 +30,20 @@
 \begin{align}
 	\label{eq:sysEquat_deflection}
   	\begin{cases}
-		\dfrac{d \varphi}{dx} &= - \dfrac{M}{E \cdot J} \\[3ex]
+		\dfrac{d \varphi}{dz} &= - \dfrac{M}{E \cdot J} \\[3ex]
 		\dfrac{d \nu}{dz} &= \varphi
   	\end{cases}
 \end{align}
 
-Из ситемы уравнений \eqref{eq:sysEquat_deflection} выразим величину прогиба $\nu$
+Из сиcтемы уравнений \eqref{eq:sysEquat_deflection} выразим величину прогиба $\nu$
 
 \begin{align}
 	\label{eq:iint_deflection}
-  	\nu &=  \int\limits_{0}^{L} \int\limits_{0}^{z'}  \frac{M(z)}{E(z) \cdot J(z)} \,dz \,dz
+  	\nu &=  \left| \int\limits_{0}^{L} \int\limits_{0}^{z'}  \frac{M(z)}{E(z) \cdot J(z)} \,dz \,dz \right|
 \end{align}
 
-По формуле (\ref{eq:iint_deflection}) рассчитывается значение модуля прогиба,
-то есть знак "$-$" \ опущен. Переменная $L$ это суммарную длину
+По формуле (\ref{eq:iint_deflection}) рассчитывается значение модуля прогиба.
+Переменная $L$ это суммарная длина
 рабочей части образца и рычага в метрах \eqref{eq:L_Lp_Ls}. Кроме этого
 в подинтегральном выражении значения изгибающего момента $M(z)$,
 момента инерции сечения $J(z)$ и величина модуля Юнга $E(z)$ зависят от
@@ -85,27 +85,28 @@
 
 \begin{align}
 	\label{eq:Mz_rect_x-axis}
-	&M(z) = P(L-z) \\
+	&M(z) = P \cdot (L-z) \\
 	\label{eq:Ez_rect_x-axis}
 	&E(z) =
 	\begin{cases}
-		\text{Модуль Юнга материала образца,} &\text{если }\ 0 \leqslant z < L \_ s \\
-		\text{Модуль Юнга материала рычага,} &\text{если }\ L \_ s \leqslant z \leqslant L
+		\text{Модуль Юнга материала образца,} &\text{если }\ 0 \leqslant z < L_s \\
+		\text{Модуль Юнга материала рычага,} &\text{если }\ L_s \leqslant z \leqslant L
 	\end{cases}
 	\\
 	\label{eq:Jz_rect_x-axis}
 	&J(z) =
 	\begin{cases}
-		\dfrac{2}{3} \cdot b \_ s^3 \cdot y(z) \text{,} &\text{если }\ 0 \leqslant z < L \_ s \\[3ex]
-		\dfrac{b \_ p^3 \cdot a \_ p}{12} \text{,} &\text{если }\ L \_ s \leqslant z \leqslant L
+		\dfrac{2}{3} \cdot b_s^3 \cdot y(z) \text{,} &\text{если }\ 0 \leqslant z < L_s \\[3ex]
+		\dfrac{b_p^3 \cdot a_p}{12} \text{,} &\text{если }\ L_s \leqslant z \leqslant L
 	\end{cases}
 \end{align}
 
-Величина $L$ это суммарная длина рабочей части образца и рычага
+Величина $L$ это сумма длин рабочей части образца и рычага до точки приложения
+к нему силы $\vec P$
 
 \begin{align}
 	\label{eq:L_Lp_Ls}
-	L = L \_s + L \_ p
+	L = L_s + L_p
 \end{align}
 
 Зависимость $y(z)$ определяется геометрией образца и рассчитывается из системы уравнений
@@ -114,14 +115,14 @@
 	\label{eq:yz_R_s_y_0_z_0}
 	\begin{cases}
 		y(z) &= y_0 - \sqrt{R_s^2-(z - z_0)^2} \\[2ex]
-		y_0 &= R_s + \dfrac{h \_ s}{2} \\[2ex]
-		z_0 &= \dfrac{L \_ s}{2} \\[2ex]
-		R_s &= \dfrac{L \_ s^2 +(H \_ s - h \_ s)^2}{4 \cdot (H \_ s - h \_ s)}
+		y_0 &= R_s + \dfrac{h_s}{2} \\[2ex]
+		z_0 &= \dfrac{L_s}{2} \\[2ex]
+		R_s &= \dfrac{L_s^2 +(H_s - h_s)^2}{4 \cdot (H_s - h_s)}
 	\end{cases}
 \end{align}
 
 В системе уравнений \eqref{eq:yz_R_s_y_0_z_0} $y_0$ и $z_0$ это координаты
-центра радиуса скругления образца, а $R_s$ это радиус скругления. Изображение образца
+центра радиуса скругления у образца, а $R_s$ это радиус скругления. Изображение образца
 с указанием начала координат и центром скругления показано на Рис. .
 
 %\begin{wrapfigure}{2}{200pt}
