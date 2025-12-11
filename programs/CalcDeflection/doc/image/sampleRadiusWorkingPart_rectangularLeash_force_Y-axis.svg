@@ -628,6 +628,22 @@
          clip-rule="evenodd"
          id="path601" />
     </clipPath>
+    <marker
+       style="overflow:visible"
+       id="Dot"
+       refX="0"
+       refY="0"
+       orient="auto"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 5,0 C 5,2.76 2.76,5 0,5 -2.76,5 -5,2.76 -5,0 c 0,-2.76 2.3,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         id="path219" />
+    </marker>
   </defs>
   <g
      id="g1">
@@ -2022,4 +2038,8 @@
        d="m 44.00003,399.92001 18.87998,-2.32 -18.87998,-2.63999 1.91998,2.55999 z"
        id="path234-2" />
   </g>
+  <path
+     style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-dasharray:4,4;stroke-dashoffset:0;stroke-opacity:1;marker-end:url(#Dot)"
+     d="m 96.96,15.36 c 105.51355,81.270352 85.38225,175.67152 0,185.39795"
+     id="path217" />
 </svg>

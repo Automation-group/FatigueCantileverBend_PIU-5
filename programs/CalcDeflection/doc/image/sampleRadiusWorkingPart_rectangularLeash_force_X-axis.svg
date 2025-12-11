@@ -11,6 +11,22 @@
    xmlns:svg="http://www.w3.org/2000/svg">
   <defs
      id="defs1">
+    <marker
+       style="overflow:visible"
+       id="Dot"
+       refX="0"
+       refY="0"
+       orient="auto"
+       markerWidth="1"
+       markerHeight="1"
+       viewBox="0 0 1 1"
+       preserveAspectRatio="xMidYMid">
+      <path
+         transform="scale(0.5)"
+         style="fill:context-stroke;fill-rule:evenodd;stroke:none"
+         d="M 5,0 C 5,2.76 2.76,5 0,5 -2.76,5 -5,2.76 -5,0 c 0,-2.76 2.3,-5 5,-5 2.76,0 5,2.24 5,5 z"
+         id="path219" />
+    </marker>
     <clipPath
        clipPathUnits="userSpaceOnUse"
        id="clipPath218">
@@ -2021,5 +2037,9 @@
        d="m 164.07999,443.29141 -1.34375,-0.45312 z m -4,-3.73827 v -4.01563 c 0,-0.35156 -0.12891,-0.70703 -0.39062,-1.0625 -0.26954,-0.36328 -0.58594,-0.60156 -0.95313,-0.71875 l -8.03125,-2.75 c -0.36328,-0.125 -0.67187,-0.0977 -0.92187,0.0781 -0.25782,0.16797 -0.39063,0.4336 -0.39063,0.79688 v 4.01563 z m 1.34375,0.45312 4.65625,1.59375 c 0.16406,0.0625 0.31641,0.1875 0.45313,0.375 0.14453,0.1875 0.21875,0.36719 0.21875,0.53125 0,0.15625 -0.0586,0.28516 -0.17188,0.39063 -0.11719,0.10156 -0.28125,0.11719 -0.5,0.0469 l -17.35938,-5.9375 c -0.44532,-0.14453 -0.67188,-0.44142 -0.67188,-0.89063 v -4.6875 c 0,-0.72656 0.25781,-1.26562 0.76563,-1.60937 0.51172,-0.35156 1.14063,-0.39844 1.89063,-0.14063 l 8.03125,2.75 c 0.74219,0.25 1.375,0.71875 1.90625,1.40625 0.52344,0.6875 0.78125,1.40625 0.78125,2.15625 z"
        style="fill:#000000;fill-opacity:1;fill-rule:nonzero;stroke:none;stroke-width:0.083496"
        aria-label="L_p" />
+    <path
+       style="fill:none;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-opacity:1;marker-end:url(#Dot);stroke-dasharray:4,4;stroke-dashoffset:0"
+       d="m 96.96,15.36 c 105.51355,81.270356 85.38225,175.67152 0,185.39795"
+       id="path217" />
   </g>
 </svg>
