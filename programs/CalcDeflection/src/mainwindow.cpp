@@ -308,7 +308,6 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
         ui->textBrowser->append("Ошибка H_s < h_s");
         return;
     }
-
     double R_s = (L_s*L_s+(H_s-hs)*(H_s-hs))/(4.0*(H_s-hs)); // радиус образца [м]
     double z_0 = L_s/2.0; // расстояние от центра радиуса до 0 по оси z [м]
     double y_0 = R_s + hs/2.0; // расстояние от центра радиуса до 0 по оси y [м]
@@ -316,7 +315,7 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     // Параметры поводка
     double L_p = ui->doubleSpinBox_L_p->value()/1000.0;  // длина поводка [м]
     double a_p = ui->doubleSpinBox_a_p->value()/1000.0; // толщина прямоугольного поводка [м]
-    double b_p = ui->doubleSpinBox_b_p->value()/1000.0; // высота прямоугольного поводка [м]
+    double b_p = ui->doubleSpinBox_b_p->value()/1000.0; // ширина прямоугольного поводка [м]
     double D_p = ui->doubleSpinBox_D_p->value()/1000.0; // диаметр круглого поводка [м]
     double E_2 = ui->doubleSpinBox_E2->value()*1.0e+9; // модуль Юнга поводка из титана [Па]
     double P_force = 1.0; // сила приложенная к концу поводка [H] (используется в расчёте и измерять её не нужно)
@@ -326,27 +325,38 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     double dz = L_sp/pow(10.0,ui->spinBox_integStep->value()); // шаг интегрирования (по умолчанию L/1.0e+6)
     double W_fi = 0.0; // промежуточный результат интегрирования
     double W_tau = 0.0; // максимальное отклонение [м]
-    double Wzmax = 0.0; // максимальное напряжение на поверхности рабочей части образца при приложении силы P [м]
-    double I2_z = 0.0; // момент инерции сечения поводка A<=z<=L (поводок прямоугольного сечения)
-    if(!leash_section) 
-		if(!direction_force) I2_z = b_p*b_p*b_p*a_p/12.0; // сила направлена по оси х
-		else I2_z = a_p*a_p*a_p*b_p/12.0; // сила направлена по оси y
-    else I2_z = M_PI*D_p*D_p*D_p*D_p/64.0; // момент инерции сечения поводка A<=z<=L (поводок круглого сечения)
+    double Szmax = 0.0; // максимальное мех. напряжение на поверхности рабочей части образца при приложении силы P [Па]
+    double I2_z = 0.0; // момент инерции сечения поводка L_s<=z<=L_sp (поводок прямоугольного сечения)
+    if(!leash_section) {
+        if(!direction_force) I2_z = b_p*b_p*b_p*a_p/12.0; // сила направлена по оси х
+        else I2_z = a_p*a_p*a_p*b_p/12.0; // сила направлена по оси y
+    }
+    else I2_z = M_PI*D_p*D_p*D_p*D_p/64.0; // момент инерции сечения поводка L_s<=z<=L_sp (поводок круглого сечения)
 
     double I1_z_const = 0.0; // момент инерции сечения образца
-    if (!direction_force) I1_z_const = 2.0*b_s*b_s*b_s/3.0; // смещение перпендикулярно ширине образца
-    else I1_z_const = 2.0*b_s/3.0; // смещение перпендикулярно радиусу образца
+    if (!direction_force) I1_z_const = b_s*b_s*b_s/6.0; // смещение перпендикулярно ширине образца (сила по оси x)
+    else I1_z_const = 2.0*b_s/3.0; // смещение перпендикулярно радиусу образца (сила по оси y)
     double R_square = R_s*R_s;
     double P_E2_I2z_const = P_force/(E_2*I2_z);
     double z = 0.0;
+    double z_max = 0.0;
     while (z < L_sp+dz) {
         if (z < L_s) {
             double y = y_0-sqrt(R_square-(z-z_0)*(z-z_0));
-            double I1_z = 0.0;
-            if (!direction_force) I1_z = I1_z_const*y; // сила направлена по оси х
-            else I1_z = I1_z_const*y*y*y; // сила направлена по оси y
-            double Wz = y*P_force*(L_sp-z)/(I1_z*1.0e+6);
-            if (Wz > Wzmax) Wzmax = Wz;
+            double I1_z = 0.0; // момент инерции сечения образца
+            double Sz = 0.0; // мех. напряжение в рабочей области образца
+            if (!direction_force) {
+                I1_z = I1_z_const*y; // сила направлена по оси х
+                Sz = b_s*P_force*(L_sp-z)/(I1_z*2.0); // сила направлена по оси х
+            }
+            else {
+                I1_z = I1_z_const*y*y*y; // сила направлена по оси y
+                Sz = y*P_force*(L_sp-z)/I1_z; // сила направлена по оси y
+            }
+            if (Sz > Szmax) {
+                Szmax = Sz; // нахождение максимального мех. напряжения
+                z_max = z; // расстояние до Szmax по оси z
+            }
 
             W_fi += dz*P_force*(L_sp-z)/(E_1*I1_z);
             W_tau += W_fi*dz;
@@ -358,8 +368,8 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     }
     // Результаты калибровки и параметры испытания
     double sens = ui->doubleSpinBox_coeff_k->value(); // чувствительность или коэффициент k при аппроксимации калибровочной зависимости прямой [ед.ацп/мкм]
-    double stress = ui->doubleSpinBox_stress->value()*1e+6; // напряжение на поверхности образца в эксперименте [МПа]
-    double deflection = W_tau*stress/(Wzmax*1e+6); // прогиб образца [м]
+    double stress = ui->doubleSpinBox_stress->value()*1e+6; // напряжение на поверхности образца в эксперименте [Па]
+    double deflection = W_tau*stress/Szmax; // прогиб образца [м]
 
     // Размеры и модуль Юнга образца
     ui->textBrowser->append("ОБРАЗЕЦ (РАСЧЁТ №"+QString::number(calcResultId)+")");
@@ -387,11 +397,12 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
         ui->textBrowser->append("Чувствительность = "+QString::number(sens)+" ед.ацп/мкм," );
     }
     if(ui->checkBox_force1N->isChecked()){
-        ui->textBrowser->append("v max = "+QString::number(W_tau*1000.0)+" мм при приложении силы P = "+QString::number(P_force)+" Н,");
-        ui->textBrowser->append("σ max = "+QString::number(Wzmax)+" МПа при приложении силы P = "+QString::number(P_force)+" Н,");
+        ui->textBrowser->append("v tau = "+QString::number(W_tau*1000.0)+" мм при приложении силы P = "+QString::number(P_force)+" Н,");
+        ui->textBrowser->append("σ max = "+QString::number(Szmax/1e+6)+" МПа при приложении силы P = "+QString::number(P_force)+" Н,");
+        ui->textBrowser->append("z max = "+QString::number(z_max*1e+3)+" мм при приложении силы P = "+QString::number(P_force)+" Н,");
     }
     ui->textBrowser->append("Прогиб v при "+QString::number(stress/1e+6)+" МПа равен "+QString::number(deflection*1000)+" мм,");
-    ui->textBrowser->append("Сила на конце поводка при прогибе v равна "+QString::number(P_force*stress/(Wzmax*1e+6))+ " Н");
+    ui->textBrowser->append("Сила на конце поводка при прогибе v равна "+QString::number(P_force*stress/Szmax)+ " Н");
 
     // Время окончания отсчёта
     auto finish_time_us = std::chrono::high_resolution_clock::now()-start_time_us;
