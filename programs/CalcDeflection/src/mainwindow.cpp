@@ -368,8 +368,8 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
     }
     // Результаты калибровки и параметры испытания
     double sens = ui->doubleSpinBox_coeff_k->value(); // чувствительность или коэффициент k при аппроксимации калибровочной зависимости прямой [ед.ацп/мкм]
-    double stress = ui->doubleSpinBox_stress->value()*1e+6; // напряжение на поверхности образца в эксперименте [Па]
-    double deflection = W_tau*stress/Szmax; // прогиб образца [м]
+    double Sigma = ui->doubleSpinBox_stress->value()*1e+6; // напряжение на поверхности образца в эксперименте [Па]
+    double deflection = W_tau*Sigma/Szmax; // прогиб образца [м]
 
     // Размеры и модуль Юнга образца
     ui->textBrowser->append("ОБРАЗЕЦ (РАСЧЁТ №"+QString::number(calcResultId)+")");
@@ -401,8 +401,8 @@ void MainWindow::on_pushButton_calc_clicked(bool checked){
         ui->textBrowser->append("σ max = "+QString::number(Szmax/1e+6)+" МПа при приложении силы P = "+QString::number(P_force)+" Н,");
         ui->textBrowser->append("z max = "+QString::number(z_max*1e+3)+" мм при приложении силы P = "+QString::number(P_force)+" Н,");
     }
-    ui->textBrowser->append("Прогиб v при "+QString::number(stress/1e+6)+" МПа равен "+QString::number(deflection*1000)+" мм,");
-    ui->textBrowser->append("Сила на конце поводка при прогибе v равна "+QString::number(P_force*stress/Szmax)+ " Н");
+    ui->textBrowser->append("Прогиб v при "+QString::number(Sigma/1e+6)+" МПа равен "+QString::number(deflection*1000)+" мм,");
+    ui->textBrowser->append("Сила на конце поводка при прогибе v равна "+QString::number(P_force*Sigma/Szmax)+ " Н");
 
     // Время окончания отсчёта
     auto finish_time_us = std::chrono::high_resolution_clock::now()-start_time_us;
