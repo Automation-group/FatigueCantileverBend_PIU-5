@@ -13,11 +13,17 @@
 \usepackage[left=2cm, top=3cm, right=2cm, bottom=2cm]{geometry} % отступы по краям листа
 \usepackage{hyperref} % макрос для ссылок
 \usepackage{svg} % чтения формата svg
-\definecolor{linkcolor}{HTML}{009900} % цвет ссылок (зелёный)
-\definecolor{urlcolor}{HTML}{009900} % цвет гиперссылок
 %\DeclareUnicodeCharacter{00A0}{} % неразрывные пробелы в кодировке UTF-8
 \DeclareUnicodeCharacter{200E}{} % написание с лева на право
-\hypersetup{pdfstartview=FitH, linkcolor=linkcolor, urlcolor=urlcolor, colorlinks=true} % настройка цветов для выделения ссылок
+\definecolor{linkcolor}{HTML}{0000FF} % цвет ссылок HEX
+\definecolor{urlcolor}{HTML}{0000FF} % цвет гиперссылок HEX
+\definecolor{bibicolor}{HTML}{0000FF} % цвет ссылок на источники HEX
+\hypersetup{
+			pdfstartview=FitH,
+			linkcolor=linkcolor,
+			urlcolor=urlcolor,
+			citecolor=bibicolor,
+			colorlinks=true} % настройка цветов для выделения ссылок
 
 % титульный лист
 \title{Описание алгоритмов расчёта программы CalcDeflection 0.2}
