@@ -43,8 +43,16 @@ cmake --build build/ --parallel 8
 Сборка документации с помощью LATEX
 
 cd doc/
-# Формат pdf
+# Формат pdf (https://latex-tutorial.com/subfigure-latex/ - хорошая документация по latex)
 pdflatex -output-directory=build -output-format=pdf --shell-escape CalcDeflection_doc.tex
+# Для того что бы убрать предупреждение PDF inclusion: multiple pdfs with page group included in a single page
+# нужно в папке ..\doc\svg-inkscape после первого компилирования выполнить следующие команды:
+gs -o sampleRadiusWorkingPart_circularLeash_force_X-axis_svg-tex_.pdf -sDEVICE=pdfwrite -dColorConversionStrategy=/sRGB -dProcessColorModel=/DeviceRGB sampleRadiusWorkingPart_circularLeash_force_X-axis_svg-tex.pdf
+gs -o sampleRadiusWorkingPart_circularLeash_force_Y-axis_svg-tex_.pdf -sDEVICE=pdfwrite -dColorConversionStrategy=/sRGB -dProcessColorModel=/DeviceRGB sampleRadiusWorkingPart_circularLeash_force_Y-axis_svg-tex.pdf
+gs -o sampleRadiusWorkingPart_rectangularLeash_force_X-axis_svg-tex_.pdf -sDEVICE=pdfwrite -dColorConversionStrategy=/sRGB -dProcessColorModel=/DeviceRGB sampleRadiusWorkingPart_rectangularLeash_force_X-axis_svg-tex.pdf
+gs -o sampleRadiusWorkingPart_rectangularLeash_force_Y-axis_svg-tex_.pdf -sDEVICE=pdfwrite -dColorConversionStrategy=/sRGB -dProcessColorModel=/DeviceRGB sampleRadiusWorkingPart_rectangularLeash_force_Y-axis_svg-tex.pdf
+# после выполнения комманд нужно файлы с без _ удалить а у файлов с _ нижнее подчёркивание удалить.
+
 # Формат dvi
 pdflatex -output-directory=build -output-format=dvi --shell-escape CalcDeflection_doc.tex
 # Формат html
